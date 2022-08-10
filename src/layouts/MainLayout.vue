@@ -63,6 +63,7 @@
 import { defineComponent, ref } from 'vue'
 // import EssentialLink from 'components/EssentialLink.vue'
 import CustomList from 'src/components/CustomList.vue'
+import contentItems from '../content/_map.json'
 
 const linksList = [
   {
@@ -111,50 +112,50 @@ const linksList = [
 
 // import * as content from 'src/content';
 
-const contentItems = {
-    "name": "content",
-    "type": "directory",
-    "children": [
-        {
-            "name": "Folder A",
-            "type": "directory",
-            "children": [
-                {
-                    "name": "Folder C",
-                    "type": "directory",
-                    "children": [
-                        {
-                            "name": "Note C",
-                            "type": "file",
-                            "src": "../content/Folder A/Folder C/Note C.md"
-                        }
-                    ]
-                },
-                {
-                    "name": "Note A",
-                    "type": "file",
-                    "src": "../content/Folder A/Note A.md"
-                }
-            ]
-        },
-        {
-            "name": "Folder D",
-            "type": "directory",
-            "children": [
-                {
-                    "name": "Note D",
-                    "type": "file",
-                    "src": "../content/Folder D/Note D.md"
-                }
-            ]
-        },
-        {
-            "name": "Note B",
-            "type": "file",
-            "src": "../content/Note B.md"
-        }
-    ]
-}
+// const contentItems = {
+//     "name": "content",
+//     "type": "directory",
+//     "children": [
+//         {
+//             "name": "Folder A",
+//             "type": "directory",
+//             "children": [
+//                 {
+//                     "name": "Folder B",
+//                     "type": "directory",
+//                     "children": [
+//                         {
+//                             "name": "Note B",
+//                             "type": "file",
+//                             "src": "../content/Folder A/Folder B/Note B.md"
+//                         }
+//                     ]
+//                 },
+//                 {
+//                     "name": "Folder C",
+//                     "type": "directory",
+//                     "children": [
+//                         {
+//                             "name": "Note C",
+//                             "type": "file",
+//                             "src": "../content/Folder A/Folder C/Note C.md"
+//                         }
+//                     ]
+//                 },
+//                 {
+//                     "name": "Note A",
+//                     "type": "file",
+//                     "src": "../content/Folder A/Note A.md"
+//                 }
+//             ]
+//         },
+//         {
+//             "name": "Note C",
+//             "type": "file",
+//             "src": "../content/Note C.md"
+//         }
+//     ]
+// }
 
 export default defineComponent({
   name: 'MainLayout',
