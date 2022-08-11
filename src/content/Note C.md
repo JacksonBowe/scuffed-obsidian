@@ -1,4 +1,4 @@
-[Note A](Folder%20A\Note%20A.md) [Hello](TEST%20A\Note%20A.md)
+[Note A](Folder%20A\Note%20A.md)
 
 [Note B](Folder%20A\Folder%20B\Note%20B.md)
 

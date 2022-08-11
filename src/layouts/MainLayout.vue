@@ -26,7 +26,7 @@
       :width="500"
       class="q-pl-xl"
     >
-      <q-list class="q-ml-xl q-pl-xl ">
+      <q-list class="q-ml-xl q-pl-xl q-pt-lg" :inner-width="100" :outer-width="50" >
         <q-item-label class=""
           header
         >
@@ -109,53 +109,6 @@ const linksList = [
     link: 'https://awesome.quasar.dev'
   }
 ]
-
-// import * as content from 'src/content';
-
-// const contentItems = {
-//     "name": "content",
-//     "type": "directory",
-//     "children": [
-//         {
-//             "name": "Folder A",
-//             "type": "directory",
-//             "children": [
-//                 {
-//                     "name": "Folder B",
-//                     "type": "directory",
-//                     "children": [
-//                         {
-//                             "name": "Note B",
-//                             "type": "file",
-//                             "src": "../content/Folder A/Folder B/Note B.md"
-//                         }
-//                     ]
-//                 },
-//                 {
-//                     "name": "Folder C",
-//                     "type": "directory",
-//                     "children": [
-//                         {
-//                             "name": "Note C",
-//                             "type": "file",
-//                             "src": "../content/Folder A/Folder C/Note C.md"
-//                         }
-//                     ]
-//                 },
-//                 {
-//                     "name": "Note A",
-//                     "type": "file",
-//                     "src": "../content/Folder A/Note A.md"
-//                 }
-//             ]
-//         },
-//         {
-//             "name": "Note C",
-//             "type": "file",
-//             "src": "../content/Note C.md"
-//         }
-//     ]
-// }
 
 export default defineComponent({
   name: 'MainLayout',
