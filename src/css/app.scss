@@ -1,0 +1,18 @@
+// app global css in Sass form
+
+@font-face {
+    font-family: Risque;
+    src: url('./fonts/Risque-Regular.ttf');
+}
+
+body {
+    font-family: Risque;
+}
+
+p {
+    // font-size: 1.25em;
+}
+
+h2 {
+    color: red;
+}

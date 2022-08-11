@@ -26,25 +26,7 @@ class folder:
 start_path = './src/content'
 content = {}
 
-# for path, dirs, files in os.walk(start_path):
-#   path = path.replace('\\', '/')
-#   print('path', path)
-#   print('dirs', dirs)
-#   print('files', files)
-#   print()
 
-#   for file in files:
-#     content[file]
-
-	# for dir in dirs:
-	#   print('dir', dir)
-		# content[dir] = {}
-	# for filename in files:
-	#   content[dir][filename] = os.path.join(path.replace('/src', '.'),filename)
-	#   print(os.path.join(path.replace('/src', '.'),filename))
-
-
-# print(json.dumps(content, indent=4))
 
 files = []
 

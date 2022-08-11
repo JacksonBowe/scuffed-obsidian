@@ -19,7 +19,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer
+    <!-- <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
       dark
@@ -32,12 +32,6 @@
         >
           Docs
         </q-item-label>
-
-        <!-- <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        /> -->
         <custom-list
           v-for="child in contentItems.children"
           :key="child"
@@ -45,14 +39,39 @@
           :item="child"
         />
       </q-list>
-    </q-drawer>
+    </q-drawer> -->
     <!-- <div class="bg-blue row">
       <div class="text-white bg-green">
         <span>Testffff<br><br><br><br><br><br>ffffffffffffffffffffffffffffffffffffffffffffffffffffff</span>
       </div> -->
-      <q-page-container>
-        <router-view />
-      </q-page-container>
+      <div class="row">
+        <div class="col-2" style="max-width: 200px"></div>
+        <div class="col-2 q-pt-xl">
+            <q-list class="q-pt-lg" :inner-width="100" :outer-width="50" >
+                <q-item-label class=""
+                header
+                >
+                Docs
+                </q-item-label>
+
+                <!-- <EssentialLink
+                v-for="link in essentialLinks"
+                :key="link.title"
+                v-bind="link"
+                /> -->
+                <custom-list
+                v-for="child in contentItems.children"
+                :key="child"
+
+                :item="child"
+                />
+            </q-list>
+        </div>
+        <q-page-container class="col">
+            <router-view />
+        </q-page-container>
+      </div>
+      
     <!-- </div> -->
 
 
