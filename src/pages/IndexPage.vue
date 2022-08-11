@@ -4,7 +4,7 @@
 	<div class="q-pa-lg col-7">
 		<!-- no-heading-anchor-links -->
 		<q-scroll-area class="fit" :visible="false">
-			<q-markdown ref="markdown" :src="content" class="q-pl-lg" :key="content" toc :toc-start="1" no-heading-anchor-links :toc-end="6"  @data="onToc" />
+			<q-markdown ref="markdown" :src="content" class="q-pl-lg" :key="content" toc :toc-start="2" no-heading-anchor-links :toc-end="6"  @data="onToc" :plugins="plugins" />
 		</q-scroll-area>
 
 	</div>
@@ -15,8 +15,8 @@
 		</div> -->
 		<q-list dense>
 			<q-item-label header class="body">ON THIS PAGE</q-item-label>
-			<q-item dense v-for="section in toc" :key="section" class="toc-item" :inset-level="(section.level-1) / 4"  >
-				<q-item-section >
+			<q-item dense v-for="section in toc" :key="section" class="toc-item" :inset-level="(section.level-2) / 4" >
+				<q-item-section side >
 					<span v-html="section.label"  />
 				</q-item-section>
 
@@ -29,6 +29,7 @@
 <script>
 import { defineComponent, computed, onUpdated, onMounted, ref } from 'vue'
 import { useQuasar } from 'quasar'
+import taskLists from 'markdown-it-task-lists'
 // import markdown from "../content/Note B.md"
 
 import {  onBeforeRouteUpdate, useRoute } from 'vue-router'
@@ -47,7 +48,8 @@ export default defineComponent({
 
 		onUpdated(async () => {
 			await loadContent()
-			//   toc.value = {}
+			// toc.value = {}
+            console.log(markdown.value)
 			//   await loadToc()
 		})
 
@@ -92,7 +94,8 @@ export default defineComponent({
 		onToc,
 		markdown,
 		toc,
-		test
+		test,
+		plugins: [taskLists]
 		}
 	}
 })
@@ -101,7 +104,7 @@ export default defineComponent({
 <style scoped>
 
 .toc-item {
-	opacity: 0.85;
+	/* opacity: 0.85; */
 }
 
 .toc-item:hover {
