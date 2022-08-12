@@ -4,7 +4,7 @@
 	<div class="q-pa-lg col-7">
 		<!-- no-heading-anchor-links -->
 		<q-scroll-area class="fit" :visible="false">
-			<q-markdown ref="markdown" :src="content" class="q-pl-lg" :key="content" toc :toc-start="2" no-heading-anchor-links :toc-end="6"  @data="onToc" :plugins="plugins" />
+			<q-markdown ref="markdown" :src="content" class="q-pl-lg" :key="content" no-line-numbers toc :toc-start="1" no-heading-anchor-links :toc-end="6"  @data="onToc" :plugins="plugins" content-class="" />
 		</q-scroll-area>
 
 	</div>
@@ -15,7 +15,7 @@
 		</div> -->
 		<q-list dense>
 			<q-item-label header class="body">ON THIS PAGE</q-item-label>
-			<q-item dense v-for="section in toc" :key="section" class="toc-item" :inset-level="(section.level-2) / 4" >
+			<q-item dense v-for="section in toc" :key="section" class="toc-item" :inset-level="(section.level-1) / 4" >
 				<q-item-section side >
 					<span v-html="section.label"  />
 				</q-item-section>
@@ -30,6 +30,8 @@
 import { defineComponent, computed, onUpdated, onMounted, ref } from 'vue'
 import { useQuasar } from 'quasar'
 import taskLists from 'markdown-it-task-lists'
+import admonition from 'markdown-it-admonition'
+import container from 'markdown-it-container'
 // import markdown from "../content/Note B.md"
 
 import {  onBeforeRouteUpdate, useRoute } from 'vue-router'
@@ -76,8 +78,10 @@ export default defineComponent({
 			// console.log('markdown', markdown.value)
 
 			// toc.value = markdown.value.makeTree(toc)
-			console.log(toc.value)
 		}
+
+		console.log(container)
+
 
 		const q = useQuasar()
 
@@ -90,12 +94,15 @@ export default defineComponent({
 
 
 		return {
-		content,
-		onToc,
-		markdown,
-		toc,
-		test,
-		plugins: [taskLists]
+			content,
+			onToc,
+			markdown,
+			toc,
+			test,
+			plugins: [
+				taskLists,
+				{plugin: admonition, options: {marker: '!', types: ["note", "abstract", "info", "tip", "success", "question", "warning", "failure", "danger", "bug", "example", "quote", "night-actions", "day-actions", "special-actions"]}}
+			]
 		}
 	}
 })
@@ -110,6 +117,8 @@ export default defineComponent({
 .toc-item:hover {
 	/* color: red; */
 }
+
+
 
 
 </style>

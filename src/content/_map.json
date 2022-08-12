@@ -25,6 +25,21 @@
             ]
         },
         {
+            "name": "MafiaGame",
+            "type": "file",
+            "src": "../content/MafiaGame.md"
+        },
+        {
+            "name": "meta",
+            "type": "directory",
+            "children": [
+                {
+                    "name": "css.scss",
+                    "type": "file"
+                }
+            ]
+        },
+        {
             "name": "Note C",
             "type": "file",
             "src": "../content/Note C.md"

@@ -36,7 +36,8 @@ module.exports = configure(function (/* ctx */) {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: [
-      'app.scss'
+      'app.scss',
+	  'user.scss'
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
@@ -47,7 +48,7 @@ module.exports = configure(function (/* ctx */) {
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
-      // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
+    //   'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
       'roboto-font', // optional, you are not bound to it
       'material-icons', // optional, you are not bound to it

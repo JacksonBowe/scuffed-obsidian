@@ -2,4 +2,14 @@
 
 [Note B](#/content/Folder%20A/Folder%20B/Note%20B.md)
 
-[Test](https://github.com/JacksonBowe/obsidian-zola/blob/main/utils.py)
+````ad-info
+tresdtdfh
+````
+
+> 
+> !!! info test
+dfdsg
+
+
+[!note] test-note
+hello

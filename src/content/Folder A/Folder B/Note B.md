@@ -34,11 +34,11 @@ Seems like it must come from the actor because that's where all the logic is
 
 * [ ] Night action
 
-  - \[x\] Goes night immune
+  - [x] Goes night immune
 
-  - \[x\] self.remaining_vests goes down by 1
+  - [x] self.remaining_vests goes down by 1
 
-  - \[ \] Events should contain log "You don your bullet proof vest, you have {x} remaining"
+  - [ ] Events should contain log "You don your bullet proof vest, you have {x} remaining"
 
 #### Doctor
 
@@ -48,9 +48,9 @@ Seems like it must come from the actor because that's where all the logic is
 
 * [ ] Night action
 
-  - \[x\] Successful heal?
+  - [x] Successful heal?
 
-  - \[ \] Events should contain log of what happened
+  - [ ] Events should contain log of what happened
 
 #### Detective
 
@@ -60,9 +60,9 @@ Seems like it must come from the actor because that's where all the logic is
 
 * [ ] Night Action
 
-  - \[ \] At targets house?
+  - [ ] At targets house?
 
-  - \[ \] Successfull track?
+  - [ ] Successfull track?
 
 ### <font color="red">Mafia</font>
 
@@ -74,13 +74,13 @@ Seems like it must come from the actor because that's where all the logic is
 
 * [x] Basic kill (target not protected/healed/etc)
 
-  - \[x\] At targets house?
+  - [x] At targets house?
 
 * [ ] Target Night Immune
 
-  - \[x\] Target should be alive
+  - [x] Target should be alive
 
-  - \[ \] Events should contain log "Target is Night Immune"
+  - [ ] Events should contain log "Target is Night Immune"
 
 ### <font color="yellow">Neutral</font>
 

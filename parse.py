@@ -48,10 +48,73 @@ def path_to_dict(path):
                 lines = f.readlines()
                 new_lines = []
 
+                in_container = False
                 for line in lines:
                     # line = ''
-                    links = re.findall(r"\[((.*?)\]\((?!http)(\S*?)(\.md)?(#\S+)?)\)", line)
+                    line = line.lstrip(' ')
+                    if line.replace(' ', '') == '>':
+                        print('Found empty blockquote')
+                        continue
+
+
                     # x = re.sub(r"\[((.*?)\]\((?!http)(\S*?)(\.md)?(#\S+)?)\)", '{}'.format(), line)
+                    # if line.startswith('#'):
+                    #     parts = line.split(' ')
+                    #     if parts[0].count('#') == len(parts[0]):
+                    #         print('here')
+                    #         line = f"{parts[0]} <h{len(parts[0])}>{line[len(parts[0]) + 1:]}</h{len(parts[0])}>"
+                    #         print(line)
+
+                    # Convert callouts to admonition containers
+                    # > [!info] xxx  --> !!! info xxx
+
+                    # Fix obsidian-export bugs
+                    # if in_container:
+                        # if line.startswith('>') or line.startswith(' '):
+                        #     while line.startswith('>') or line.startswith(' '):
+                        #         print('Line starts with garbage, stripping')
+                        #         line = line.lstrip(' ')
+                        #         line = line.lstrip('>')
+                        # else:
+                        #     print('Leaving container')
+                        #     in_container = False
+
+                    if in_container:
+                        if not line.startswith('>'):
+                            in_container = False
+                            break
+                        else:
+                            while line.startswith('>') or line.startswith(' '):
+                                print('Line starts with garbage, stripping')
+                                line = line.lstrip(' ')
+                                line = line.lstrip('>')
+
+
+
+                    line = line.replace('\[', '[')
+                    line = line.replace('\]', ']')
+                    callouts = re.findall(r"((\>+) \[(.*?)\]([+-]?) (.*))", line)
+                    if callouts:
+                        print('Entering container')
+                        in_container = True
+                        print('line', line)
+                        print('callouts', callouts)
+                        # in_container = True
+                        for callout in callouts:
+                            print("line", line)
+                            # while line.startswith('>') or line.startswith(' '):
+                            #     print('Line starts with garbage, stripping')
+                            #     line = line.lstrip(' ')
+                            #     line = line.lstrip('>')
+                            line = line.replace(f'[{callout[2]}] {callout[4]}', f'!!! {callout[2][1:].lower()} {callout[4]}')
+                        print(f'new_line: {line}')
+
+
+                        # Inside a callout
+
+                    # Convert links
+                    links = re.findall(r"\[((.*?)\]\((?!http)(\S*?)(\.md)?(#\S+)?)\)", line)
+
                     if not links:
                         new_lines.append(line)
                         continue
@@ -69,7 +132,7 @@ def path_to_dict(path):
                     print('new_line', line)
                     new_lines.append(line)
 
-                print('lines', new_lines)
+                # print('lines', new_lines)
                 f.seek(0)
                 f.writelines(new_lines)
                 f.truncate()

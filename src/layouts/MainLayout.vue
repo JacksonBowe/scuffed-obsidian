@@ -47,18 +47,12 @@
       <div class="row">
         <div class="col-2" style="max-width: 200px"></div>
         <div class="col-2 q-pt-xl">
-            <q-list class="q-pt-lg" :inner-width="100" :outer-width="50" >
+            <q-list class="q-pt-lg" :inner-width="100" :outer-width="50" dense >
                 <q-item-label class=""
                 header
                 >
                 Docs
                 </q-item-label>
-
-                <!-- <EssentialLink
-                v-for="link in essentialLinks"
-                :key="link.title"
-                v-bind="link"
-                /> -->
                 <custom-list
                 v-for="child in contentItems.children"
                 :key="child"
@@ -71,7 +65,7 @@
             <router-view />
         </q-page-container>
       </div>
-      
+
     <!-- </div> -->
 
 

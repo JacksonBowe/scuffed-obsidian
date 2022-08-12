@@ -1,5 +1,5 @@
 <template>
-  <q-expansion-item v-if="item.type == 'directory'" :label="item.name" expand-separator :header-inset-level="inset" :content-inset-level="inset + insetStep">
+  <q-expansion-item v-if="item.type == 'directory'" dense :label="item.name" expand-separator :header-inset-level="inset" :content-inset-level="inset + insetStep">
     <custom-list
           v-for="child in item.children"
           :key="child"
@@ -8,7 +8,7 @@
 
         />
   </q-expansion-item>
-  <q-item v-else clickable @click="openNote(item)"  >
+  <q-item v-else clickable @click="openNote(item)" dense  >
     <q-item-section>
       <q-item-label>{{ item.name }}</q-item-label>
     </q-item-section>
