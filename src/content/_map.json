@@ -3,46 +3,9 @@
     "type": "directory",
     "children": [
         {
-            "name": "Folder A",
-            "type": "directory",
-            "children": [
-                {
-                    "name": "Folder B",
-                    "type": "directory",
-                    "children": [
-                        {
-                            "name": "Note B",
-                            "type": "file",
-                            "src": "../content/Folder A/Folder B/Note B.md"
-                        }
-                    ]
-                },
-                {
-                    "name": "Note A",
-                    "type": "file",
-                    "src": "../content/Folder A/Note A.md"
-                }
-            ]
-        },
-        {
-            "name": "MafiaGame",
+            "name": "test",
             "type": "file",
-            "src": "../content/MafiaGame.md"
-        },
-        {
-            "name": "meta",
-            "type": "directory",
-            "children": [
-                {
-                    "name": "css.scss",
-                    "type": "file"
-                }
-            ]
-        },
-        {
-            "name": "Note C",
-            "type": "file",
-            "src": "../content/Note C.md"
+            "src": "../content/test.md"
         }
     ]
 }

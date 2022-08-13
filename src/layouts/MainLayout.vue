@@ -1,49 +1,30 @@
 <template>
   <q-layout view="hHh LpR lFf" class="">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+    <q-header elevated dark class="bg-transparent">
+      <q-toolbar class="row bg-transparent" dark>
+        <div class="col-2" style="max-width:200px"></div>
+        <div class="row col">
+            <q-btn
+              flat
+              dense
+              round
+              icon="menu"
+              aria-label="Menu"
+              @click="toggleLeftDrawer"
+            />
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+            <q-toolbar-title class="content-center flex">
+            Quasar App
+            </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+            
+        </div>
+        <div>
+            Quasar v{{ $q.version }}
+        </div>
       </q-toolbar>
     </q-header>
 
-    <!-- <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      dark
-      :width="500"
-      class="q-pl-xl"
-    >
-      <q-list class="q-ml-xl q-pl-xl q-pt-lg" :inner-width="100" :outer-width="50" >
-        <q-item-label class=""
-          header
-        >
-          Docs
-        </q-item-label>
-        <custom-list
-          v-for="child in contentItems.children"
-          :key="child"
-
-          :item="child"
-        />
-      </q-list>
-    </q-drawer> -->
-    <!-- <div class="bg-blue row">
-      <div class="text-white bg-green">
-        <span>Testffff<br><br><br><br><br><br>ffffffffffffffffffffffffffffffffffffffffffffffffffffff</span>
-      </div> -->
       <div class="row">
         <div class="col-2" style="max-width: 200px"></div>
         <div class="col-2 q-pt-xl">

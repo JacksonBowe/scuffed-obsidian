@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 import json
 import re
-from typing import List, Dict
+from typing import List, Dict, ClassVar, Tuple
 import os
 
 def is_md(name: str) -> bool:
@@ -22,6 +22,73 @@ class folder:
 
 
 # print(x)
+
+@dataclass
+class Line:
+    value: str
+    in_container: ClassVar[bool] = False
+
+    def __init__(self, line: str) -> None:
+        self.value = line.lstrip() # obsidian-eport puts random ass spaces at the front, get that shit out of here
+        self.value =  self.value.replace('\[', '[')
+        self.value =  self.value.replace('\]', ']')
+
+        # if self.in_container:
+        #     self._trim_start_for_container()
+
+    def _trim_start_for_container(self):
+        print('container line', [self.value])
+        if not self.value.startswith('>'):
+            print('breaking')
+            self.in_container = False
+        else:
+            while self.value.startswith('>') or self.value.startswith(' '):
+                print('Line starts with garbage, stripping')
+                self.value = self.value.lstrip(' ')
+                self.value = self.value.lstrip('>')
+
+    def is_empty_quote(self) -> bool:
+        temp = self.value.replace(' ', '')
+        temp = temp.replace('\n', '')
+        return temp == '>'
+
+    def callouts(self) -> List[tuple]:
+        # > [!INFO] Test --> [('> [!INFO] Test', '>', '!INFO', '+', 'Test')]
+        return re.findall(r"(([\> ]+) \[(.*?)\]([+-]?) (.*))", self.value)
+
+    def convert_callouts(self: List[Tuple[str, str, str, str, str]]):
+        # Convert callouts to admonition containers
+        # > [!info] xxx  --> !!! info xxx
+        callouts = self.callouts()
+        if callouts:
+            print('Entering container')
+            Line.in_container = True
+            print('line:', self.value)
+            print('callouts:', callouts)
+            # in_container = True
+            for callout in callouts:
+                self.value = self.value.replace(f'{callout[0]}', f'!!! {callout[2][1:].lower()} {callout[4] or callout[2][1:].lower().capitalize()}')
+            print(f'new_line: {self.value}')
+
+    def links(self):
+        return re.findall(r"\[((.*?)\]\((?!http)(\S*?)(\.md)?(#\S+)?)\)", self.value)
+
+    def convert_links(self):
+        links = self.links()
+        if not links: return
+        print('Links found', links)
+        print('old_line', self.value)
+        for link in links:
+
+            old_link = "[{}]({}{})".format(link[1], link[2], link[3])
+            new_link = "[{}]({}{})".format(link[1], '#/content/' + link[2].replace('\\', '/'), link[3])
+            self.value = self.value.replace(old_link, new_link)
+            print('old_link', old_link)
+            print('new_link', new_link)
+
+        print('new_line', self.value)
+
+
 
 base = 'http://localhost:9000/#/'
 start_path = './src/content'
@@ -47,14 +114,22 @@ def path_to_dict(path):
             with open(path, 'r+') as f:
                 lines = f.readlines()
                 new_lines = []
+                print(lines)
 
                 in_container = False
                 for line in lines:
-                    # line = ''
-                    line = line.lstrip(' ')
-                    if line.replace(' ', '') == '>':
+                    line = Line(line) # obsidian-eport puts random ass spaces at the front, get that shit out of here
+                    
+
+                    # line.check_for_empty_block_quote()
+                    # test = test
+
+                    if line.is_empty_quote():
                         print('Found empty blockquote')
                         continue
+
+                    if line.in_container:
+                        print('here')
 
 
                     # x = re.sub(r"\[((.*?)\]\((?!http)(\S*?)(\.md)?(#\S+)?)\)", '{}'.format(), line)
@@ -79,62 +154,68 @@ def path_to_dict(path):
                         #     print('Leaving container')
                         #     in_container = False
 
-                    if in_container:
-                        if not line.startswith('>'):
-                            in_container = False
-                            break
-                        else:
-                            while line.startswith('>') or line.startswith(' '):
-                                print('Line starts with garbage, stripping')
-                                line = line.lstrip(' ')
-                                line = line.lstrip('>')
+                    # if in_container:
+                    #     print('container line', [line])
+                    #     if not line.startswith('>'):
+                    #         print('breaking')
+                    #         in_container = False
+                    #         break
+                    #     else:
+                    #         while line.startswith('>') or line.startswith(' '):
+                    #             print('Line starts with garbage, stripping')
+                    #             line = line.lstrip(' ')
+                    #             line = line.lstrip('>')
 
 
+                    line.convert_callouts()
+                    line.convert_links()
 
-                    line = line.replace('\[', '[')
-                    line = line.replace('\]', ']')
-                    callouts = re.findall(r"((\>+) \[(.*?)\]([+-]?) (.*))", line)
-                    if callouts:
-                        print('Entering container')
-                        in_container = True
-                        print('line', line)
-                        print('callouts', callouts)
-                        # in_container = True
-                        for callout in callouts:
-                            print("line", line)
-                            # while line.startswith('>') or line.startswith(' '):
-                            #     print('Line starts with garbage, stripping')
-                            #     line = line.lstrip(' ')
-                            #     line = line.lstrip('>')
-                            line = line.replace(f'[{callout[2]}] {callout[4]}', f'!!! {callout[2][1:].lower()} {callout[4]}')
-                        print(f'new_line: {line}')
+                    if line.in_container: line._trim_start_for_container()
+
+                    # line = line.replace('\[', '[')
+                    # line = line.replace('\]', ']')
+                    # callouts = re.findall(r"(([\> ]+) \[(.*?)\]([+-]?) (.*))", line)
+                    # if line.callouts():
+                    #     print('Entering container')
+                    #     in_container = True
+                    #     print('line:', line)
+                    #     print('callouts:', line.callouts())
+                    #     # in_container = True
+                    #     for callout in line.callouts():
+                    #         print("line", line)
+                    #         # while line.startswith('>') or line.startswith(' '):
+                    #         #     print('Line starts with garbage, stripping')
+                    #         #     line = line.lstrip(' ')
+                    #         #     line = line.lstrip('>')
+                    #         line = line.replace(f'{callout[0]}', f'!!! {callout[2][1:].lower()} {callout[4]}')
+                    #     print(f'new_line: {line}')
 
 
                         # Inside a callout
 
                     # Convert links
-                    links = re.findall(r"\[((.*?)\]\((?!http)(\S*?)(\.md)?(#\S+)?)\)", line)
+                    # links = re.findall(r"\[((.*?)\]\((?!http)(\S*?)(\.md)?(#\S+)?)\)", line)
 
-                    if not links:
-                        new_lines.append(line)
-                        continue
-                    print('Links found', links)
-                    print('old_line', line)
-                    for link in links:
+                    # if not links:
+                    #     new_lines.append(line)
+                    #     continue
+                    # print('Links found', links)
+                    # print('old_line', line)
+                    # for link in links:
 
-                        old_link = "[{}]({}{})".format(link[1], link[2], link[3])
-                        new_link = "[{}]({}{})".format(link[1], '#/content/' + link[2].replace('\\', '/'), link[3])
-                        line = line.replace(old_link, new_link)
-                        print(line)
-                        print('old_link', old_link)
-                        print('new_link', new_link)
+                    #     old_link = "[{}]({}{})".format(link[1], link[2], link[3])
+                    #     new_link = "[{}]({}{})".format(link[1], '#/content/' + link[2].replace('\\', '/'), link[3])
+                    #     line = line.replace(old_link, new_link)
+                    #     print(line)
+                    #     print('old_link', old_link)
+                    #     print('new_link', new_link)
 
-                    print('new_line', line)
+                    # print('new_line', line)
                     new_lines.append(line)
 
                 # print('lines', new_lines)
                 f.seek(0)
-                f.writelines(new_lines)
+                f.writelines([line.value for line in new_lines])
                 f.truncate()
 
 
