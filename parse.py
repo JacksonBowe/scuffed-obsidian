@@ -29,7 +29,7 @@ class Line:
     in_container: ClassVar[bool] = False
 
     def __init__(self, line: str) -> None:
-        self.value = line.lstrip() # obsidian-eport puts random ass spaces at the front, get that shit out of here
+        self.value = line.lstrip(' ') # obsidian-export puts random ass spaces at the front, get that shit out of here
         self.value =  self.value.replace('\[', '[')
         self.value =  self.value.replace('\]', ']')
 
@@ -37,13 +37,13 @@ class Line:
         #     self._trim_start_for_container()
 
     def _trim_start_for_container(self):
-        print('container line', [self.value])
+        # print('container line', [self.value])
         if not self.value.startswith('>'):
-            print('breaking')
+            # print('breaking')
             self.in_container = False
         else:
             while self.value.startswith('>') or self.value.startswith(' '):
-                print('Line starts with garbage, stripping')
+                # print('Line starts with garbage, stripping')
                 self.value = self.value.lstrip(' ')
                 self.value = self.value.lstrip('>')
 
@@ -61,14 +61,20 @@ class Line:
         # > [!info] xxx  --> !!! info xxx
         callouts = self.callouts()
         if callouts:
-            print('Entering container')
+            # print('Entering container')
             Line.in_container = True
-            print('line:', self.value)
-            print('callouts:', callouts)
+            # print('line:', self.value)
+            # print('callouts:', callouts)
             # in_container = True
             for callout in callouts:
                 self.value = self.value.replace(f'{callout[0]}', f'!!! {callout[2][1:].lower()} {callout[4] or callout[2][1:].lower().capitalize()}')
-            print(f'new_line: {self.value}')
+            # print(f'new_line: {self.value}')
+        else:
+            if Line.in_container and self.value == '\n':
+                self.value = '!!! ' + self.value
+                Line.in_container = False
+
+        if self.in_container: self._trim_start_for_container()
 
     def links(self):
         return re.findall(r"\[((.*?)\]\((?!http)(\S*?)(\.md)?(#\S+)?)\)", self.value)
@@ -76,17 +82,17 @@ class Line:
     def convert_links(self):
         links = self.links()
         if not links: return
-        print('Links found', links)
-        print('old_line', self.value)
+        # print('Links found', links)
+        # print('old_line', self.value)
         for link in links:
 
             old_link = "[{}]({}{})".format(link[1], link[2], link[3])
-            new_link = "[{}]({}{})".format(link[1], '#/content/' + link[2].replace('\\', '/'), link[3])
+            new_link = "[{}]({}{})".format(link[1], '#/content/' + link[2].replace('\\', '/'), link[3]) # .replace('../', '')
             self.value = self.value.replace(old_link, new_link)
-            print('old_link', old_link)
-            print('new_link', new_link)
+            # print('old_link', old_link)
+            # print('new_link', new_link)
 
-        print('new_line', self.value)
+        # print('new_line', self.value)
 
 
 
@@ -96,7 +102,7 @@ content = {}
 
 
 
-files = []
+files = {}
 
 def path_to_dict(path):
     name = os.path.basename(path)
@@ -106,131 +112,47 @@ def path_to_dict(path):
         d['children'] = [path_to_dict(os.path.join(path,x)) for x in os.listdir(path) if not x.startswith("_")]
     else:
         d['type'] = "file"
+        d['name'] = d['name'].replace('.md', '')
+        d['src'] = path.replace('/src', '.').replace('\\', '/')
+        
 
+        print('path', path, 'name', d['name'],'src', d['src'])
         # print(name)
         if name.endswith('.md'):
-
+            files[d['name']] = d['src']
             # Read the file and fix broken markdown links
-            with open(path, 'r+') as f:
-                lines = f.readlines()
-                new_lines = []
-                print(lines)
+            # with open(path, 'r+') as f:
+            #     lines = f.readlines()
+            #     new_lines = []
+            #     # print('origional', [line for line in lines])
+            #     for line in lines:
 
-                in_container = False
-                for line in lines:
-                    line = Line(line) # obsidian-eport puts random ass spaces at the front, get that shit out of here
-                    
+            #         # print('yo', [line])
+            #         line = Line(line) # obsidian-eport puts random ass spaces at the front, get that shit out of here
 
-                    # line.check_for_empty_block_quote()
-                    # test = test
+            #         if line.is_empty_quote():
+            #             print('Found empty blockquote')
+            #             continue
+            #         # print('here', [line.value])
 
-                    if line.is_empty_quote():
-                        print('Found empty blockquote')
-                        continue
+            #         line.convert_callouts()
+            #         line.convert_links()
+            #         new_lines.append(line)
 
-                    if line.in_container:
-                        print('here')
-
-
-                    # x = re.sub(r"\[((.*?)\]\((?!http)(\S*?)(\.md)?(#\S+)?)\)", '{}'.format(), line)
-                    # if line.startswith('#'):
-                    #     parts = line.split(' ')
-                    #     if parts[0].count('#') == len(parts[0]):
-                    #         print('here')
-                    #         line = f"{parts[0]} <h{len(parts[0])}>{line[len(parts[0]) + 1:]}</h{len(parts[0])}>"
-                    #         print(line)
-
-                    # Convert callouts to admonition containers
-                    # > [!info] xxx  --> !!! info xxx
-
-                    # Fix obsidian-export bugs
-                    # if in_container:
-                        # if line.startswith('>') or line.startswith(' '):
-                        #     while line.startswith('>') or line.startswith(' '):
-                        #         print('Line starts with garbage, stripping')
-                        #         line = line.lstrip(' ')
-                        #         line = line.lstrip('>')
-                        # else:
-                        #     print('Leaving container')
-                        #     in_container = False
-
-                    # if in_container:
-                    #     print('container line', [line])
-                    #     if not line.startswith('>'):
-                    #         print('breaking')
-                    #         in_container = False
-                    #         break
-                    #     else:
-                    #         while line.startswith('>') or line.startswith(' '):
-                    #             print('Line starts with garbage, stripping')
-                    #             line = line.lstrip(' ')
-                    #             line = line.lstrip('>')
-
-
-                    line.convert_callouts()
-                    line.convert_links()
-
-                    if line.in_container: line._trim_start_for_container()
-
-                    # line = line.replace('\[', '[')
-                    # line = line.replace('\]', ']')
-                    # callouts = re.findall(r"(([\> ]+) \[(.*?)\]([+-]?) (.*))", line)
-                    # if line.callouts():
-                    #     print('Entering container')
-                    #     in_container = True
-                    #     print('line:', line)
-                    #     print('callouts:', line.callouts())
-                    #     # in_container = True
-                    #     for callout in line.callouts():
-                    #         print("line", line)
-                    #         # while line.startswith('>') or line.startswith(' '):
-                    #         #     print('Line starts with garbage, stripping')
-                    #         #     line = line.lstrip(' ')
-                    #         #     line = line.lstrip('>')
-                    #         line = line.replace(f'{callout[0]}', f'!!! {callout[2][1:].lower()} {callout[4]}')
-                    #     print(f'new_line: {line}')
-
-
-                        # Inside a callout
-
-                    # Convert links
-                    # links = re.findall(r"\[((.*?)\]\((?!http)(\S*?)(\.md)?(#\S+)?)\)", line)
-
-                    # if not links:
-                    #     new_lines.append(line)
-                    #     continue
-                    # print('Links found', links)
-                    # print('old_line', line)
-                    # for link in links:
-
-                    #     old_link = "[{}]({}{})".format(link[1], link[2], link[3])
-                    #     new_link = "[{}]({}{})".format(link[1], '#/content/' + link[2].replace('\\', '/'), link[3])
-                    #     line = line.replace(old_link, new_link)
-                    #     print(line)
-                    #     print('old_link', old_link)
-                    #     print('new_link', new_link)
-
-                    # print('new_line', line)
-                    new_lines.append(line)
-
-                # print('lines', new_lines)
-                f.seek(0)
-                f.writelines([line.value for line in new_lines])
-                f.truncate()
+            #     # print('result', [line.value for line in new_lines])
+            #     f.seek(0)
+            #     f.writelines([line.value for line in new_lines])
+            #     f.truncate()
 
 
 
                 #   pass
 
-            d['name'] = d['name'].replace('.md', '')
-            d['src'] = path.replace('/src', '.').replace('\\', '/')
+    
     return d
 
 
 
-# print(json.dumps(path_to_dict(start_path), indent=4))
-# print(files)
-
-
 with open(start_path + '/_map.json', 'w') as f:
     json.dump(path_to_dict(start_path), f, indent=4)
+    print(json.dumps(files, indent=4))

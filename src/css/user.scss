@@ -46,6 +46,7 @@ $admonition-background-color-map: (
     background-color: map-get($admonition-background-color-map, "note");
     border-left: 0.25rem solid map-get($admonition-color-map, "note");
     overflow: auto;
+    
 
     .admonition-title {
         font-weight: bold;
@@ -59,8 +60,11 @@ $admonition-background-color-map: (
         background-color: map-get($admonition-background-color-map, "note");
     }
 
-    .admonition-content {
-        padding: 0.5rem 0;
+    p {
+        padding: 0.5rem 0 0 0;
+        // justify-content: center;
+        // text-align: center;
+        // background-color: #64dd17;
     }
 
     i.icon {
@@ -92,11 +96,17 @@ $admonition-background-color-map: (
     $color in $admonition-background-color-map {
         &.#{$type} {
             background-color: $color;
+            // text-align: center;
+            // text-justify: center;
+
+            // .admonition-content {}
 
             .admonition-title {
                 border-bottom-color: $color;
                 background-color: opacify($color, 0.15);
             }
+
+
 
             &.open .admonition-title {
                 background-color: $color;
