@@ -1,0 +1,187 @@
+{
+    "name": "content",
+    "type": "directory",
+    "children": [
+        {
+            "name": "Gameplay",
+            "type": "directory",
+            "children": [
+                {
+                    "name": "Gameplay Overview",
+                    "type": "file",
+                    "src": "../content/Gameplay/Gameplay Overview.md"
+                },
+                {
+                    "name": "Mafia",
+                    "type": "directory",
+                    "children": [
+                        {
+                            "name": "Mafia",
+                            "type": "file",
+                            "src": "../content/Gameplay/Mafia/Mafia.md"
+                        },
+                        {
+                            "name": "Overview",
+                            "type": "file",
+                            "src": "../content/Gameplay/Mafia/Overview.md"
+                        },
+                        {
+                            "name": "Roles",
+                            "type": "directory",
+                            "children": [
+                                {
+                                    "name": "Mafioso",
+                                    "type": "file",
+                                    "src": "../content/Gameplay/Mafia/Roles/Mafioso.md"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Town",
+                    "type": "directory",
+                    "children": [
+                        {
+                            "name": "Overview",
+                            "type": "file",
+                            "src": "../content/Gameplay/Town/Overview.md"
+                        },
+                        {
+                            "name": "Roles",
+                            "type": "directory",
+                            "children": [
+                                {
+                                    "name": "Bodyguard",
+                                    "type": "file",
+                                    "src": "../content/Gameplay/Town/Roles/Bodyguard.md"
+                                },
+                                {
+                                    "name": "Citizen",
+                                    "type": "file",
+                                    "src": "../content/Gameplay/Town/Roles/Citizen.md"
+                                },
+                                {
+                                    "name": "Doctor",
+                                    "type": "file",
+                                    "src": "../content/Gameplay/Town/Roles/Doctor.md"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Town",
+                            "type": "file",
+                            "src": "../content/Gameplay/Town/Town.md"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "MafiaGame",
+            "type": "file",
+            "src": "../content/MafiaGame.md"
+        },
+        {
+            "name": "Misc",
+            "type": "directory",
+            "children": [
+                {
+                    "name": "Engine Tests",
+                    "type": "file",
+                    "src": "../content/Misc/Engine Tests.md"
+                },
+                {
+                    "name": "LobbyControllerTasks",
+                    "type": "file",
+                    "src": "../content/Misc/LobbyControllerTasks.md"
+                },
+                {
+                    "name": "TODO's",
+                    "type": "file",
+                    "src": "../content/Misc/TODO's.md"
+                }
+            ]
+        },
+        {
+            "name": "Technical",
+            "type": "directory",
+            "children": [
+                {
+                    "name": "Api",
+                    "type": "file",
+                    "src": "../content/Technical/Api.md"
+                },
+                {
+                    "name": "AuthController",
+                    "type": "file",
+                    "src": "../content/Technical/AuthController.md"
+                },
+                {
+                    "name": "Controllers",
+                    "type": "file",
+                    "src": "../content/Technical/Controllers.md"
+                },
+                {
+                    "name": "Database",
+                    "type": "file",
+                    "src": "../content/Technical/Database.md"
+                },
+                {
+                    "name": "GameState",
+                    "type": "file",
+                    "src": "../content/Technical/GameState.md"
+                },
+                {
+                    "name": "GameStateResolver",
+                    "type": "file",
+                    "src": "../content/Technical/GameStateResolver.md"
+                },
+                {
+                    "name": "HTTP Verbs",
+                    "type": "file",
+                    "src": "../content/Technical/HTTP Verbs.md"
+                }
+            ]
+        },
+        {
+            "name": "test-folder",
+            "type": "directory",
+            "children": [
+                {
+                    "name": "t2",
+                    "type": "directory",
+                    "children": [
+                        {
+                            "name": "t3",
+                            "type": "directory",
+                            "children": [
+                                {
+                                    "name": "t4",
+                                    "type": "directory",
+                                    "children": [
+                                        {
+                                            "name": "t8",
+                                            "type": "file",
+                                            "src": "../content/test-folder/t2/t3/t4/t8.md"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Test 1",
+                                    "type": "file",
+                                    "src": "../content/test-folder/t2/t3/Test 1.md"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Test 2",
+                    "type": "file",
+                    "src": "../content/test-folder/Test 2.md"
+                }
+            ]
+        }
+    ]
+}

@@ -4,7 +4,7 @@
 	<div class="q-pa-lg col-7">
 		<!-- no-heading-anchor-links -->
 		<q-scroll-area class="fit" :visible="false">
-			<q-markdown ref="markdown" :src="content" class="q-pl-lg" :key="content" no-line-numbers toc :toc-start="1" no-heading-anchor-links :toc-end="6"  @data="onToc" :plugins="plugins" content-class="" />
+			<q-markdown ref="markdown" :src="content" class="q-pl-lg text-" :key="content" no-line-numbers toc :toc-start="1" no-heading-anchor-links :toc-end="6"  @data="onToc" :plugins="plugins" content-class="" />
 		</q-scroll-area>
 
 	</div>

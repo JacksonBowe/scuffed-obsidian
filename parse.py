@@ -23,6 +23,19 @@ class folder:
 
 # print(x)
 
+
+@dataclass
+class File:
+    name: str
+    path: str
+    url: str
+
+    def __init__(self, path) -> None:
+        self.path = path.replace('\\', '/')
+        self.url = path.replace('/src', '.').replace('\\', '/').replace('..', '#').replace(' ', '%20')
+        self.name = self.path.split('/')[-1]
+        pass
+
 @dataclass
 class Line:
     value: str
@@ -85,18 +98,16 @@ class Line:
         # print('Links found', links)
         # print('old_line', self.value)
         for link in links:
-
+            # print('found', link)
             old_link = "[{}]({}{})".format(link[1], link[2], link[3])
-            new_link = "[{}]({}{})".format(link[1], '#/content/' + link[2].replace('\\', '/'), link[3]) # .replace('../', '')
+            file = files[link[1]] # Get the File pertaining to the file name captured in link[1]
+            new_link = "[{}]({})".format(link[1], file.url) # .replace('../', '')
             self.value = self.value.replace(old_link, new_link)
             # print('old_link', old_link)
             # print('new_link', new_link)
 
-        # print('new_line', self.value)
 
 
-
-base = 'http://localhost:9000/#/'
 start_path = './src/content'
 content = {}
 
@@ -105,54 +116,53 @@ content = {}
 files = {}
 
 def path_to_dict(path):
+    # if 'files' not in locals(): files = {}
     name = os.path.basename(path)
-    d = {'name': name}
+    item = {'name': name}
     if os.path.isdir(path):
-        d['type'] = "directory"
-        d['children'] = [path_to_dict(os.path.join(path,x)) for x in os.listdir(path) if not x.startswith("_")]
+        item['type'] = "directory"
+        item['children'] = [path_to_dict(os.path.join(path,x)) for x in os.listdir(path) if not x.startswith(".")]
     else:
-        d['type'] = "file"
-        d['name'] = d['name'].replace('.md', '')
-        d['src'] = path.replace('/src', '.').replace('\\', '/')
-        
 
-        print('path', path, 'name', d['name'],'src', d['src'])
-        # print(name)
-        if name.endswith('.md'):
-            files[d['name']] = d['src']
-            # Read the file and fix broken markdown links
-            # with open(path, 'r+') as f:
-            #     lines = f.readlines()
-            #     new_lines = []
-            #     # print('origional', [line for line in lines])
-            #     for line in lines:
+        item['type'] = "file"
+        item['name'] = item['name'].replace('.md', '')
+        item['src'] = path.replace('/src', '.').replace('\\', '/')
 
-            #         # print('yo', [line])
-            #         line = Line(line) # obsidian-eport puts random ass spaces at the front, get that shit out of here
+        files[item['name']] = File(path)
 
-            #         if line.is_empty_quote():
-            #             print('Found empty blockquote')
-            #             continue
-            #         # print('here', [line.value])
+    return item
 
-            #         line.convert_callouts()
-            #         line.convert_links()
-            #         new_lines.append(line)
+def parse(file: File):
+    print('Parsing file: {}'.format(file.name))
+    # Read the file and fix broken markdown links
+    with open(file.path, 'r+') as f:
+        lines = f.readlines()
+        new_lines = []
+        for line in lines:
+            line = Line(line)
 
-            #     # print('result', [line.value for line in new_lines])
-            #     f.seek(0)
-            #     f.writelines([line.value for line in new_lines])
-            #     f.truncate()
+            if line.is_empty_quote():
+                # print('Found empty blockquote')
+                continue
+
+            line.convert_callouts()
+            line.convert_links()
+            new_lines.append(line)
+
+        f.seek(0)
+        f.writelines([line.value for line in new_lines])
+        f.truncate()
 
 
-
-                #   pass
-
-    
-    return d
-
-
-
-with open(start_path + '/_map.json', 'w') as f:
+# Read the directory structure and extract all files. Place files into a key:value lookup
+with open(start_path + '/.map.json', 'w') as f:
     json.dump(path_to_dict(start_path), f, indent=4)
-    print(json.dumps(files, indent=4))
+
+
+# print(json.dumps(files, indent=4))
+
+for (file_name, paths) in files.items():
+    parse(paths)
+
+
+

@@ -17,7 +17,7 @@
             Quasar App
             </q-toolbar-title>
 
-            
+
         </div>
         <div>
             Quasar v{{ $q.version }}
@@ -28,18 +28,11 @@
       <div class="row">
         <div class="col-2" style="max-width: 200px"></div>
         <div class="col-2 q-pt-xl">
-            <q-list class="q-pt-lg" :inner-width="100" :outer-width="50" dense >
-                <q-item-label class=""
-                header
-                >
-                Docs
+            <q-list class="q-pt-lg"  dense >
+                <q-item-label class="text-info" header>
+                	Docs
                 </q-item-label>
-                <custom-list
-                v-for="child in contentItems.children"
-                :key="child"
-
-                :item="child"
-                />
+                <custom-list v-for="child in contentItems.children" :key="child" :item="child" />
             </q-list>
         </div>
         <q-page-container class="col">
@@ -57,7 +50,7 @@
 import { defineComponent, ref } from 'vue'
 // import EssentialLink from 'components/EssentialLink.vue'
 import CustomList from 'src/components/CustomList.vue'
-import contentItems from '../content/_map.json'
+import contentItems from '../content/.map.json'
 
 const linksList = [
   {
