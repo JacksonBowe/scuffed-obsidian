@@ -29,7 +29,7 @@
         <div class="col-2" style="max-width: 200px"></div>
         <div class="col-2 q-pt-xl">
             <q-list class="q-pt-lg"  dense >
-                <q-item-label class="text-info" header>
+                <q-item-label class="text-secondary text-overline" header>
                 	Docs
                 </q-item-label>
                 <custom-list v-for="child in contentItems.children" :key="child" :item="child" />

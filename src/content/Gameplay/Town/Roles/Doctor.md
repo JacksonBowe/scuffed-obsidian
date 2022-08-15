@@ -1,5 +1,5 @@
 # <span style="color:greenYellow;">Doctor</span>
-!!! 
+
 Faction: [Town](#/content/Gameplay/Town/Town.md)
 Win Condition: Eliminate all evildoers. 
 Class: #town_protective #town_random #any_random
@@ -21,3 +21,4 @@ This notifies the player that they were revived, and yourself that you successfu
 !!! 
 !!! day-actions Day Actions
 Vote
+!!!

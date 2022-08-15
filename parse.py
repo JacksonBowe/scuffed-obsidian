@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 import json
 import re
+from tracemalloc import start
 from typing import List, Dict, ClassVar, Tuple
 import os
 
@@ -28,6 +29,7 @@ class folder:
 class File:
     name: str
     path: str
+    content: str
     url: str
 
     def __init__(self, path) -> None:
@@ -35,6 +37,10 @@ class File:
         self.url = path.replace('/src', '.').replace('\\', '/').replace('..', '#').replace(' ', '%20')
         self.name = self.path.split('/')[-1]
         pass
+
+    def read(self) -> str:
+        with open(self.path, 'r') as f:
+            return f.read()
 
 @dataclass
 class Line:
@@ -83,9 +89,11 @@ class Line:
                 self.value = self.value.replace(f'{callout[0]}', f'!!! {callout[2][1:].lower()} {callout[4] or callout[2][1:].lower().capitalize()}')
             # print(f'new_line: {self.value}')
         else:
-            if Line.in_container and self.value == '\n':
+            if Line.in_container and (self.value == '\n' or self.value is None):
                 self.value = '!!! ' + self.value
                 Line.in_container = False
+            # elif Line.in_container:
+                # print('******************************', [self.value])
 
         if self.in_container: self._trim_start_for_container()
 
@@ -95,16 +103,12 @@ class Line:
     def convert_links(self):
         links = self.links()
         if not links: return
-        # print('Links found', links)
-        # print('old_line', self.value)
         for link in links:
-            # print('found', link)
             old_link = "[{}]({}{})".format(link[1], link[2], link[3])
-            file = files[link[1]] # Get the File pertaining to the file name captured in link[1]
-            new_link = "[{}]({})".format(link[1], file.url) # .replace('../', '')
+            file = next((f for f in files if f.name == link[1] + link[3]), None)   #files[link[1]] # Get the File pertaining to the file name captured in link[1]
+            if file is None: return
+            new_link = "[{}]({})".format(link[1], file.url)
             self.value = self.value.replace(old_link, new_link)
-            # print('old_link', old_link)
-            # print('new_link', new_link)
 
 
 
@@ -113,7 +117,7 @@ content = {}
 
 
 
-files = {}
+files = []
 
 def path_to_dict(path):
     # if 'files' not in locals(): files = {}
@@ -128,7 +132,7 @@ def path_to_dict(path):
         item['name'] = item['name'].replace('.md', '')
         item['src'] = path.replace('/src', '.').replace('\\', '/')
 
-        files[item['name']] = File(path)
+        files.append(File(path))
 
     return item
 
@@ -138,20 +142,29 @@ def parse(file: File):
     with open(file.path, 'r+') as f:
         lines = f.readlines()
         new_lines = []
-        for line in lines:
+        for i, line in enumerate(lines):            
             line = Line(line)
 
             if line.is_empty_quote():
-                # print('Found empty blockquote')
                 continue
 
             line.convert_callouts()
             line.convert_links()
             new_lines.append(line)
 
+            if i == len(lines) - 1 and Line.in_container:
+                # If the file ends with a container, need to manually close as there's no next line to do it dynamically
+                new_lines.append(Line('!!!'))
+                Line.in_container = False
+
         f.seek(0)
         f.writelines([line.value for line in new_lines])
         f.truncate()
+        
+        # Read the new content back and save it to the File
+        f.seek(0)
+        file.content = f.read()
+
 
 
 # Read the directory structure and extract all files. Place files into a key:value lookup
@@ -161,8 +174,19 @@ with open(start_path + '/.map.json', 'w') as f:
 
 # print(json.dumps(files, indent=4))
 
-for (file_name, paths) in files.items():
-    parse(paths)
+for file in files:
+    parse(file)
+
+with open(start_path + '/.search.json', 'w') as s:
+    json.dump([{
+        'title': file.name,
+        'body': file.content,
+        'id': idx
+    } for idx, file in enumerate(files)], s, indent=4)
+
+
+    
+
 
 
 

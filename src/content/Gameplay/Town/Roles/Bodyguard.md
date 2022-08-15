@@ -1,5 +1,5 @@
 # <span style="color:greenYellow;">Bodyguard</span>
-!!! 
+
 Faction: [Town](#/content/Gameplay/Town/Town.md)
 Win Condition: Eliminate all evildoers. 
 Class: #town_protective #town_killing #town_random #any_random
@@ -20,3 +20,4 @@ At night you may select a target to protect. If that were to be attacked during 
 !!! 
 !!! day-actions Day Actions
 Vote
+!!!

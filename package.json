@@ -13,6 +13,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
+    "elasticlunr": "^0.9.5",
     "markdown-it-admonition": "^1.0.4",
     "markdown-it-container": "^3.0.0",
     "markdown-it-task-lists": "^2.1.1",

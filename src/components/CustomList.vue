@@ -1,5 +1,5 @@
 <template>
-  <q-expansion-item v-if="item.type == 'directory'" dense :label="item.name" header-class="text-weight-bolder text-overline" expand-separator :header-inset-level="inset" :content-inset-level="inset + insetStep">
+  <q-expansion-item v-if="item.type == 'directory'" dense :label="item.name" header-class="text-weight-bolder text-overline text-warning" expand-separator :header-inset-level="inset" :content-inset-level="inset + insetStep">
 	<custom-list
           v-for="child in item.children"
           :key="child"

@@ -1,5 +1,5 @@
 # <font style="color:greenYellow;">Town</font>
-!!! 
+
 The traditional villians in the Mafia game.
 
 ### Roles

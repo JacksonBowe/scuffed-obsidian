@@ -21,11 +21,6 @@
                             "src": "../content/Gameplay/Mafia/Mafia.md"
                         },
                         {
-                            "name": "Overview",
-                            "type": "file",
-                            "src": "../content/Gameplay/Mafia/Overview.md"
-                        },
-                        {
                             "name": "Roles",
                             "type": "directory",
                             "children": [
@@ -42,11 +37,6 @@
                     "name": "Town",
                     "type": "directory",
                     "children": [
-                        {
-                            "name": "Overview",
-                            "type": "file",
-                            "src": "../content/Gameplay/Town/Overview.md"
-                        },
                         {
                             "name": "Roles",
                             "type": "directory",
@@ -141,6 +131,27 @@
                     "name": "HTTP Verbs",
                     "type": "file",
                     "src": "../content/Technical/HTTP Verbs.md"
+                }
+            ]
+        },
+        {
+            "name": "Templates",
+            "type": "directory",
+            "children": [
+                {
+                    "name": "Faction Card",
+                    "type": "file",
+                    "src": "../content/Templates/Faction Card.md"
+                },
+                {
+                    "name": "RoleCard",
+                    "type": "file",
+                    "src": "../content/Templates/RoleCard.md"
+                },
+                {
+                    "name": "SimpleNote",
+                    "type": "file",
+                    "src": "../content/Templates/SimpleNote.md"
                 }
             ]
         },

@@ -17,7 +17,7 @@
 			<q-item-label header class="body">ON THIS PAGE</q-item-label>
 			<q-item dense v-for="section in toc" :key="section" class="toc-item" :inset-level="(section.level-1) / 4" >
 				<q-item-section side >
-					<span v-html="section.label"  />
+					<span v-html="section.label" class="" />
 				</q-item-section>
 
 			</q-item>
