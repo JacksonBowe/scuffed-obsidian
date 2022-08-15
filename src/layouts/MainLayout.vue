@@ -3,7 +3,7 @@
     <q-header elevated dark class="bg-transparent">
       <q-toolbar class="row bg-transparent" dark>
         <div class="col-2" style="max-width:200px"></div>
-        <div class="row col">
+        <div class="row col q-mr-md">
             <q-btn
               flat
               dense
@@ -16,9 +16,10 @@
             <q-toolbar-title class="content-center flex">
             Quasar App
             </q-toolbar-title>
-
+            <q-input  rounded dense dark standout />
 
         </div>
+        
         <div>
             Quasar v{{ $q.version }}
         </div>
