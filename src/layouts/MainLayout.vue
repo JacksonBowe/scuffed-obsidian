@@ -1,28 +1,43 @@
 <template>
   <q-layout view="hHh LpR lFf" class="">
     <q-header elevated dark class="bg-transparent">
-      <q-toolbar class="row bg-transparent" dark>
+      <q-toolbar class="row bg-transparent q-my-sm" dark>
         <div class="col-2" style="max-width:200px"></div>
         <div class="row col q-mr-md">
-            <q-btn
+            <!-- <q-btn
+			  class="graph-button"
               flat
               dense
               round
-              icon="menu"
-              aria-label="Menu"
-              @click="toggleLeftDrawer"
-            />
+              icon="hub"
+              aria-label="hub"
+            /> -->
+				<q-icon
+				 name="hub"
+				 round
+				 size="sm"
+				 class="graph-button"
+				 @click="openGraph"
+				/>
+
 
             <q-toolbar-title class="content-center flex">
-            Quasar App
+            Mafia-SDG Docs
             </q-toolbar-title>
-            <q-input  rounded dense dark standout />
+
 
         </div>
-        
+		<!-- <div class="q-pa-sm "> -->
+            <q-input class="col q-mx-lg" placeholder="Search docs..." dark rounded  standout dense  hide-bottom-space style="max-width: 500px;"  />
+
+		<!-- </div> -->
+
         <div>
             Quasar v{{ $q.version }}
         </div>
+		<div class="col" style="max-width: 200px">
+
+		</div>
       </q-toolbar>
     </q-header>
 
@@ -109,16 +124,33 @@ export default defineComponent({
   setup () {
     const leftDrawerOpen = ref(false)
 
-    // let content = require('src/content')
-    // console.log(content)
+	const openGraph = () => {
+		console.log('opening graph')
+	}
+
     return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
+    //   essentialLinks: linksList,
+    //   leftDrawerOpen,
       contentItems,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+	  openGraph
+    //   toggleLeftDrawer () {
+    //     leftDrawerOpen.value = !leftDrawerOpen.value
+    //   }
     }
   }
 })
 </script>
+
+
+<style scoped>
+
+.graph-button {
+}
+
+.graph-button:hover{
+	color: red;
+	cursor: pointer;
+}
+
+
+</style>
