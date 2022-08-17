@@ -28,8 +28,38 @@
 
         </div>
 		<!-- <div class="q-pa-sm "> -->
-            <q-input class="col q-mx-lg" placeholder="Search docs..." color="border-1px-red"  rounded outlined dense  hide-bottom-space style="max-width: 500px;"  />
+            <!-- <q-select class="col q-mx-lg" v-model="searchTerms" use-input placeholder="Search docs..." color="border-1px-red"  rounded outlined dense  hide-bottom-space style="max-width: 500px;"  /> -->
+            <q-select class="col q-mx-lg" dense rounded  outlined v-model="searchSelection" @input-value="search" use-input input-debounce="0" label="Search docs..." :options="searchResults || []" behaviour="menu" >
+                <template v-slot:no-option>
+                    <q-item>
+                        <q-item-section class="text-grey">
+                        No results
+                        </q-item-section>
+                    </q-item>
+                </template>
+                <template v-slot:option="scope">
+                    <q-item v-bind="scope.itemProps" style="height: 200px">
+                        <q-item-section avatar>
+                            <q-item-label>{{ scope.opt.label }}</q-item-label>
+                        </q-item-section>
+                        <q-item-section>
+                            <q-scroll-area class="fit">
+                                <q-markdown :src="scope.opt.value" />
+                            </q-scroll-area>
+                            
+                        </q-item-section>
+                    </q-item>
+                </template>
+            </q-select>
+            <!-- <q-list bordered>
+                <q-item-label header>Results</q-item-label>
+                <q-item v-for="result in searchResults" :key="result">
+                <q-item-section>
+                    <q-item-label>{{result}}</q-item-label>
+                </q-item-section>
 
+                </q-item>
+            </q-list> -->
 		<!-- </div> -->
 
         <div>
@@ -63,10 +93,11 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 // import EssentialLink from 'components/EssentialLink.vue'
 import CustomList from 'src/components/CustomList.vue'
 import contentItems from '../content/.map.json'
+import { fuse } from 'src/boot/fuse'
 
 const linksList = [
   {
@@ -129,14 +160,33 @@ export default defineComponent({
 		console.log('opening graph')
 	}
 
+    const searchTerms = ref('')
+
+    const search = (val) => {
+        searchTerms.value = val
+    }
+
+    const searchResults = computed(() => {
+        // console.log(fuse.search(searchTerms.value))
+        return fuse.search(searchTerms.value).map(
+            (result) => { 
+                console.log({label: result.item.title, value: result.item.body})
+                return {label: result.item.title.split('.')[0], value: result.item.body}
+            }
+        )
+    })
+
+    const searchSelection = ref(null)
+
     return {
     //   essentialLinks: linksList,
     //   leftDrawerOpen,
       contentItems,
-	  openGraph
-    //   toggleLeftDrawer () {
-    //     leftDrawerOpen.value = !leftDrawerOpen.value
-    //   }
+	  openGraph,
+      searchTerms,
+      search,
+      searchResults,
+      searchSelection
     }
   }
 })
