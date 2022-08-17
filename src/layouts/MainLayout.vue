@@ -28,7 +28,7 @@
 
         </div>
 		<!-- <div class="q-pa-sm "> -->
-            <q-input class="col q-mx-lg" placeholder="Search docs..." dark rounded  standout dense  hide-bottom-space style="max-width: 500px;"  />
+            <q-input class="col q-mx-lg" placeholder="Search docs..." color="border-1px-red"  rounded outlined dense  hide-bottom-space style="max-width: 500px;"  />
 
 		<!-- </div> -->
 
@@ -125,6 +125,7 @@ export default defineComponent({
     const leftDrawerOpen = ref(false)
 
 	const openGraph = () => {
+		// TODO
 		console.log('opening graph')
 	}
 
@@ -145,11 +146,16 @@ export default defineComponent({
 <style scoped>
 
 .graph-button {
+	color: #00FFFF;
+	-webkit-transition: color 200ms linear;
+    -ms-transition: color 200ms linear;
+    transition: color 200ms linear;
 }
 
 .graph-button:hover{
-	color: red;
+	color: hotpink; /* TODO */
 	cursor: pointer;
+
 }
 
 

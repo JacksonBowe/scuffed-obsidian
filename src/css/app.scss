@@ -7,6 +7,10 @@
     src: url('./fonts/Risque-Regular.ttf');
 }
 
+.text-risque {
+	font-family: Risque;
+}
+
 
 
 body {
@@ -49,9 +53,11 @@ a:hover {
 // 	color: red;
 // }
 
-// h1 {
-// 	text-decoration: underline;
-// }
+h1 {
+	// text-decoration: underline;
+	// text-transform: uppercase;
+	font-family: Risque;
+}
 
 // h2 {
 // 	text-decoration: underline;
