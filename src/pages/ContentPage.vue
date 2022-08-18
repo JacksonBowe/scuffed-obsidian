@@ -37,7 +37,7 @@ import container from 'markdown-it-container'
 import {  onBeforeRouteUpdate, useRoute } from 'vue-router'
 
 export default defineComponent({
-	name: 'IndexPage',
+	name: 'ContentPage',
 	setup () {
 
 		const route = useRoute()
@@ -64,20 +64,10 @@ export default defineComponent({
 			content.value = fileData.default
 		}
 
-		// const tocTree = ref({})
-		// const loadToc = async () => {
-		// 	console.log(markdown.value)
-		// 	tocTree.value = await markdown.value.makeTree(toc.value)
-		// 	console.log('tocTree', tocTree.value)
-		// }
-
 		const markdown = ref(null)
 		const toc = ref({})
 		const onToc = async (x) => {
 			toc.value = x
-			// console.log('markdown', markdown.value)
-
-			// toc.value = markdown.value.makeTree(toc)
 		}
 
 		console.log(container)
