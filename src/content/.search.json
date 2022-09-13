@@ -2,121 +2,127 @@
     {
         "title": "Gameplay Overview.md",
         "body": "\n",
+        "src": "#/content/Gameplay/Gameplay%20Overview.md",
         "id": 0
     },
     {
         "title": "Mafia.md",
-        "body": "# <font style=\"color:red;\">Mafia Overview</font>\n\nThe traditional villians in the Mafia game.\n\n### Roles\n\n* #### Killing\n\n* [Mafioso](#/content/Gameplay/Mafia/Roles/Mafioso.md)\n* #### Power\n\n* #### Protective\n\n* #### Investigative\n",
+        "body": "# <font style=\"color:red;\">Mafia Overview</font>\n\nThe traditional villians in the Mafia game.\n\n|Class|Roles|\n|-----|-----|\n|Killing|*Disguiser*, *Godfather*, *Kidnapper*, [Mafioso](#/content/Gameplay/Mafia/Roles/Mafioso.md)|\n|Support|*Agent*, *Blackmailer*, *Consigliere*, *Consort*|\n|Deception|*Beguiler*, *Disguiser*, *Framer*, *Janitor*|\n",
+        "src": "#/content/Gameplay/Mafia/Mafia.md",
         "id": 1
     },
     {
         "title": "Mafioso.md",
         "body": "# Mafioso\n\nFaction: [Mafia](#/content/Gameplay/Mafia/Mafia.md)\nWin Condition: Kill all the [Town](#/content/Gameplay/Town/Town.md) members and anyone else who gets in your way\nTags: #mafia #mafia_killing\n\n## Description\n\nMafioso is the most basic of baddies. During the day, lie through your teeth and convince the Townies that you're their ally. At night, coordinate with your team to target a player to kill. \n\nIf there is no *Godfather*, one of the mafioso will be picked at random to go and carry out the hit.\n\n## Actions\n\n!!! night-actions Night Actions\nCoordinate with other [Mafia](#/content/Gameplay/Mafia/Mafia.md) members to kill a target\n!!! \n!!! day-actions Day Actions\nVote\nLie and gaslight!\n!!! \n!!! special-actions Special\nOptional: Become *Godfather* if previous *Godfather* dies\n!!!",
+        "src": "#/content/Gameplay/Mafia/Roles/Mafioso.md",
         "id": 2
     },
     {
         "title": "Bodyguard.md",
         "body": "# <span style=\"color:greenYellow;\">Bodyguard</span>\n\nFaction: [Town](#/content/Gameplay/Town/Town.md)\nWin Condition: Eliminate all evildoers. \nClass: #town_protective #town_killing #town_random #any_random\n\n## Description\n\nThe Bodyguard is one of the playmaker roles. Your sole job is to die in a shoot out with a criminal while protecting your target.\n\nAs a Bodyguard you need to work with the other [Town](#/content/Gameplay/Town/Town.md) members to kill all non-neutral roles and defend key [Town](#/content/Gameplay/Town/Town.md) members from threats during the night.\n\nNote: If you die in a shootout you can still be revived by a [Doctor](#/content/Gameplay/Town/Roles/Doctor.md)\n\n## Actions\n\n!!! night-actions Night Actions\nProtect:\nAt night you may select a target to protect. If that were to be attacked during the night you would die in a shootout with the attacker.\n!!! \n!!! day-actions Day Actions\nVote\n!!!",
+        "src": "#/content/Gameplay/Town/Roles/Bodyguard.md",
         "id": 3
     },
     {
         "title": "Citizen.md",
         "body": "# Citizen\n\nFaction: [Town](#/content/Gameplay/Town/Town.md)\nWin Condition: Eliminate all evildoers. \nClass: #town_government #town_random #any_random\n\n## Description\n\nThe Citizen is the \"OG\" Mafia role. It's pretty boring to play, but when a Citizen actually gets a win it's the greatest thing ever.\n\nAs a citizen you need to work with the other [Town](#/content/Gameplay/Town/Town.md) members to kill all non-neutral roles.\n\n!!! night-actions Night Actions\nBulletproof vest:\nAt night you can don a bulletproof vest making you immune to basic deaths. This ability may only be used once\n!!! \n!!! day-actions Day Actions\nVote\n!!! \n!!! special-actions Special\nThe Citizen wins ties.\n!!!",
+        "src": "#/content/Gameplay/Town/Roles/Citizen.md",
         "id": 4
     },
     {
         "title": "Doctor.md",
-        "body": "# <span style=\"color:greenYellow;\">Doctor</span>\n\nFaction: [Town](#/content/Gameplay/Town/Town.md)\nWin Condition: Eliminate all evildoers. \nClass: #town_protective #town_random #any_random\n\n## Description\n\nThe Doctor is a very powerful role that works best by staying undiscovered for as long as possible. Doctors are unable to heal themselves, but can be healed by other Doctors.\n\nNote: By default, Doctors cannot heal the *Mayor*\n\nAs a doctor you need to work with the other [Town](#/content/Gameplay/Town/Town.md) members to lynch all those who would wish you harm.\n\n## Actions\n\n!!! night-actions Night Actions\nRevive:\nAt night you may select another player to monitor. If that player is killed during the night you will revive them. \nThis notifies the player that they were revived, and yourself that you successfully revived your target. It also notifies any other doctors that may have been protecting your target that night.\n!!! \n!!! day-actions Day Actions\nVote\n!!!",
+        "body": "# <span style=\"color:greenYellow;\">Doctor</span>\n\nFaction: [Town](#/content/Gameplay/Town/Town.md)\nWin Condition: Eliminate all evildoers. \nClass: #town_protective #town_random #any_random\n\n## Description\n\nThe Doctor is a very powerful role that works best by staying undiscovered for as long as possible. Doctors are unable to heal themselves, but can be healed by other Doctors.\n\n**Note**: By default, Doctors cannot heal the *Mayor*\n\nAs a doctor you need to work with the other [Town](#/content/Gameplay/Town/Town.md) members to lynch all those who would wish you harm.\n\n## Actions\n\n!!! night-actions Night Actions\nRevive:\nAt night you may select another player to monitor. If that player is killed during the night you will revive them. \nThis notifies the player that they were revived, and yourself that you successfully revived your target. It also notifies any other doctors that may have been protecting your target that night.\n!!! \n!!! day-actions Day Actions\nVote\n!!!",
+        "src": "#/content/Gameplay/Town/Roles/Doctor.md",
         "id": 5
     },
     {
         "title": "Town.md",
-        "body": "# <font style=\"color:greenYellow;\">Town</font>\n\nThe traditional villians in the Mafia game.\n\n### Roles\n\n* #### Killing\n\n* [Mafioso](#/content/Gameplay/Mafia/Roles/Mafioso.md)\n* #### Power\n\n* #### Protective\n\n* #### Investigative\n",
+        "body": "# <font style=\"color:greenYellow;\">Town</font>\n\nThe traditional villians in the Mafia game.\n\n|Class|Roles|\n|-----|-----|\n|Investigative|*Coroner*, *Detective*, *Investigator*, *Lookout*, *Sheriff*|\n|Protective|[Bodyguard](#/content/Gameplay/Town/Roles/Bodyguard.md), *Bus Driver*, [Doctor](#/content/Gameplay/Town/Roles/Doctor.md), *Escort*|\n|Government|[Citizen](#/content/Gameplay/Town/Roles/Citizen.md), *Crier*, *Marshall*, *Mason*, *Mason Leader*, *Mayor*|\n|Killing|[Bodyguard](#/content/Gameplay/Town/Roles/Bodyguard.md), *Jailor*, *Veteran*, *Vigilante*|\n|Power|*Bus Driver*, *Jailor*, *Spy*, *Veteran*|\n",
+        "src": "#/content/Gameplay/Town/Town.md",
         "id": 6
     },
     {
         "title": "MafiaGame.md",
         "body": "# Mafia Overview\n\nSee what I'm working on: [TODO's](#/content/Misc/TODO's.md)\n\n### What is this?\n\nMafia is a *Serverless* *Social Deduction Game* that I'm making using *Amazon Web Services* in my spare time. It uses a number of different amazon services and follows common *Serverless Design Patterns* to fit the serverless mould - while also being a fully functional *Web Based Game*.\n\n### Mechanics\n\nThe game isn't strictly turn based however it follows a similar principle in that there are two main states, Day and Night. \n\nDuring the Day all members of the town (inclusive of the mafia members) gather to discuss what leads they have found on the Mafia. At this time they may also decide to remove a player under suspicion of being a member of the Mafia.\n\nDuring the Night, the Mafia collude to kill off a member of the Town. Also, certain members of the Town can perform actions like \"Follow target player tonight\" or \"Inspect role\" etc.\n\n### Tools I'm using to make this\n\n##### *Backend*\n\n* [AWS ApiGateway](https://aws.amazon.com/api-gateway/) for the API layer\n* [AWS DynamoDB](https://aws.amazon.com/dynamodb/) as a database following [Single Table Design](https://aws.amazon.com/blogs/compute/creating-a-single-table-design-with-amazon-dynamodb/) principles\n* [AWS Cognito](https://aws.amazon.com/cognito/) for user authentication\n* [AWS S3](https://aws.amazon.com/s3/) for medium/large file storage (images etc)\n* [AWS IoT Core](https://aws.amazon.com/iot/) for the pub/sub functionality\n* [Postman](https://www.postman.com/) to test and document the API\n\n##### *Frontend*\n\nOpen disclaimer: I am not a front end developer. I'm not even a backend developer come to think of it.\n\nCurrently I'm making the front end with [Quasar Framework](https://quasar.dev/) - a Vue.js wrapper. It seems like a good idea based on my skill level right now. I don't know a whole lot of Javascript or Vue, or anything about web development (but how hard can it be?).\n\nMain reason I'm using Quasar is because it comes with a bunch of prebuild components and really easy to follow documentation. It also lets me use the same codebase to deploy to the web and a standalone executable. This sparks joy.\n\n##### *The glue*\n\nI've named the individual backend services and frontend framework, but they're essentially useless without a way to seamlessly integrate them together. That's where [Serverless Stack (SST)](https://serverless-stack.com/) comes in.\n\nSST is a cloud architecture development kit that lets you provision AWS Infrastructure as Code (IaC) by leveraging the base [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/home.html) with improvements geared towards serverless applications. \n\nIf you've used any IaS providers in the past like eTerraform, AWS CDK, Serverless, SAM etc I seriously recommend checking out SST. It's next level.\n\n### Objectives\n\n* Serverless (Because it's fun and hopefully cheaper)\n* Deployed to web\n* Deployed to desktop application\n* ???\n* Profit?\n\n\\#mafia-sdg #serverless #sst #todo\n",
+        "src": "#/content/MafiaGame.md",
         "id": 7
     },
     {
         "title": "Engine Tests.md",
         "body": "## Engine Testing\n\nTesting suite via PyTest\n\n## GameSave\n\n## GameState\n\nThe GameState needs a system for recording events\n\nMafioso attempting to kill should play shots sound, if kill is a success prints text\nUnless there's a bodyguard or a vet, in which case it plays those sounds?\n\nDoes actor append to events or do roles append to events\n\nSeems like it must come from the actor because that's where all the logic is\n\n## Roles\n\n### <font color=\"greenYellow\">Town</font>\n\n#### Citizen\n\n* [x] Find Allies\n* [x] Find Possible Targets\n* [ ] Night action\n* [x] Goes night immune\n* [x] self.remaining_vests goes down by 1\n* [ ] Events should contain log \"You don your bullet proof vest, you have {x} remaining\"\n\n#### Doctor\n\n* [x] Find Allies\n* [x] Find Possible Targets\n* [ ] Night action\n* [x] Successful heal?\n* [ ] Events should contain log of what happened\n\n#### Detective\n\n* [ ] Find allies\n* [ ] Find Possible Targets\n* [ ] Night Action\n* [ ] At targets house?\n* [ ] Successfull track?\n\n### <font color=\"red\">Mafia</font>\n\n#### Mafioso\n\n* [x] Find Allies\n* [x] Find Possible Targets\n* [x] Basic kill (target not protected/healed/etc)\n* [x] At targets house?\n* [ ] Target Night Immune\n* [x] Target should be alive\n* [ ] Events should contain log \"Target is Night Immune\"\n\n### <font color=\"yellow\">Neutral</font>\n\n### <font color=\"violet\">Cult</font>\n\n### <font color=\"deepSkyBlue\">Triad</font>\n",
+        "src": "#/content/Misc/Engine%20Tests.md",
         "id": 8
     },
     {
         "title": "LobbyControllerTasks.md",
         "body": "### LobbyControllerTasks\n\n* [ ] Create lobby\n* [x] Backend\n* [ ] Frontent\n* [ ] Needs to be a tab?\n* [ ] Click plus button swaps to new tab\n* [ ] Create lobby tab Name, config (todo)\n* [ ] Submit creates the lobby, and joins the user into the new lobby\n* [ ] Default config (not essential)\n* [ ] Join lobby\n* [ ] Subscribe to lobby endpoint for updates\n* [ ] Inform other players that a join has occured\n* [ ] Leave lobby\n* [ ] Unsubscribe from the lobby endpoint\n* [ ] Inform other players that a leave has occured\n* [ ] Lobby should delete on close\n\ntodae\njoin/create tabs\ncreate lobby\ncreate lobby form\npreview lobby\njoin lobby\nadd 'space around' top elements + dense?\nlobby preview card should pull from store\n",
+        "src": "#/content/Misc/LobbyControllerTasks.md",
         "id": 9
     },
     {
         "title": "TODO's.md",
-        "body": "## These docs\n\nMake them look nicer\nSee pull request: https://github.com/ppeetteerrs/obsidian-zola/issues/41\nAnd resource: https://visjs.github.io/vis-network/docs/network/nodes.html \n\n## Login\n\n* [ ] All buttons should be disabled while login is attempting\n\n## Chat\n\n* [ ] When user sends chat message it should auto append to messages list locally\n* [ ] Arriving IoT messages from the current user should be filtered and not added to the current messages list\n* [ ] Chat should send with current user's username\n* [ ] Lobby and Private chats don't work because user is not subscribed to them. Need to fix. User can be subscribed to all chat messages? Yes user should be subscribed to all otherwise they can miss private messages\n* [ ] Text inside chatbox colour should represent target\n* [ ] If user is not in LOBBY, should not be able to send lobby messages\n* [ ] When private message, how to specify target\n\n## Roles\n\n* [ ] Create role json structure\n* [ ] Python script to convert roles.json into markdown?\n* [ ] \n\nWhen getting the players in a lobby, possibly don't want to return complete user data. Just the data relevant to the lobby. Unsure\n\n## Engine\n\n* [x] User specifies what \"role tags\" they want to be in the game, select roles based on the tags provided\n* [x] Assign roles to players\n* [x] For each player import required role\n* [x] Contruct a GameState\n* [x] Export the GameState\n",
+        "body": "## These docs\n\nMake them look nicer\nSee pull request: https://github.com/ppeetteerrs/obsidian-zola/issues/41\nAnd resource: https://visjs.github.io/vis-network/docs/network/nodes.html \n\n## Login\n\n* [x] All buttons should be disabled while login is attempting\n* [x] Notify user when login fails\n\n## Lobby\n\n* [x] View Lobby\n* [ ] Create lobby\n* [x] Backend\n* [ ] Frontent\n* [x] Needs to be a tab?\n* [x] Click plus button swaps to new tab\n* [x] Create lobby tab Name, config (todo)\n* [ ] Submit creates the lobby, and joins the user into the new lobby\n* [ ] User feedback for when lobby is being created\n* [ ] Default config (not essential)\n* [ ] Join lobby\n* [ ] Subscribe to lobby endpoint for updates\n* [ ] Inform other players that a join has occured\n* [ ] Leave lobby\n* [ ] Unsubscribe from the lobby endpoint\n* [ ] Inform other players that a leave has occured\n* [ ] Remove dynamo record linking lobby and player\n* [ ] Lobby should delete on close\n\n## Chat\n\n* [ ] When user sends chat message it should auto append to messages list locally\n* [ ] Arriving IoT messages from the current user should be filtered and not added to the current messages list\n* [ ] Chat should send with current user's username\n* [ ] Lobby and Private chats don't work because user is not subscribed to them. Need to fix. User can be subscribed to all chat messages? Yes user should be subscribed to all otherwise they can miss private messages\n* [ ] Text inside chatbox colour should represent target\n* [ ] If user is not in LOBBY, should not be able to send lobby messages\n* [ ] When private message, how to specify target\n* [ ] The chat box isn't sized correctly\n\n## Roles\n\n* [ ] Create role json structure\n* [ ] Python script to convert roles.json into markdown?\n* [ ] \n\nWhen getting the players in a lobby, possibly don't want to return complete user data. Just the data relevant to the lobby. Unsure\n\n## Engine\n\n* [x] User specifies what \"role tags\" they want to be in the game, select roles based on the tags provided\n* [x] Assign roles to players\n* [x] For each player import required role\n* [x] Contruct a GameState\n* [x] Export the GameState\n\nUser holds a reference to their current lobby. Need to check that reference\n",
+        "src": "#/content/Misc/TODO's.md",
         "id": 10
     },
     {
         "title": "Api.md",
         "body": "# Mafia Api\n\n### What is this\n\n*AWS ApiGateway* is Amazons solution for deploying scalable Api endpoints, essentially for free.\n\n#### How am I using it\n\nI'm using ApiGateway as the primary data transfer layer in [MafiaGame](#/content/MafiaGame.md). When *Users* perform actions on the frontend that need to read from either the *AWS DynamoDB* database [Database](#/content/Technical/Database.md) or the *AWS S3* bucket they request the data from the Api, and it handles retrieving it.\n\nI'm setting my Api up with a *Microservice* design. I don't know if this is great practice, it may change in the future. The *Microservice* design means that there's not one big script full of logic that gets executed, but instead smaller more \"self-contained\" scripts. I label these microservices [Controllers](#/content/Technical/Controllers.md)\n\nThe frontend interacts with the API using standard API methods. My understanding, and thus implementation, of these methods is as follows;\n\n````ad-info\ntitle: HTTP Verbs\n![[HTTP Verbs#Quick Summary]]\n````\n\n*test-folder/t2/t3/t4/Test 1*\n\n##### Controllers\n\n* [AuthController](#/content/Technical/AuthController.md) - handles registration/login/recovery/etc\n* *UserController* - handles user actions get/update/etc\n* *ChatController* - handles chat messages broadcast/lobby/private/etc\n\n\\#technical\n",
+        "src": "#/content/Technical/Api.md",
         "id": 11
     },
     {
         "title": "AuthController.md",
-        "body": "# AuthController\n\n### What is this\n\nThis is one of the [Controllers](#/content/Technical/Controllers.md) linked to the [Api](#/content/Technical/Api.md) of [MafiaGame](#/content/MafiaGame.md)\n\n#### How am I using it\n\nThis controller handles all actions relating to the *AWS Cognito* user pool for the game.  The *UserPool* contains the user accounts, but is only used to authenticate *Users*. \n\n##### Functions\n\n````ad-success\ntitle: RegisterUser\ncollapse:true\n\nPayload: \n\n~~~json\n{\n\t\"username\": \"example@gmail.com\",\n\t\"password\": \"password\"\n}\n~~~\n\nExpected behaviour:\n\nSends confirmation code to user email\n\n\n````\n\n````ad-success\ntitle: GetUser\ncollapse: true\n\nParams:\n~~~json\n{\n\t\"username\": \"example@gmail.com\"\n}\n~~~\n\nExpected output: CognitoUserEntity\n\n````\n\n\\#technical\n",
+        "body": "# AuthController\n\n### What is this\n\nThis is one of the [Controllers](#/content/Technical/Controllers.md) linked to the [Api](#/content/Technical/Api.md) of [MafiaGame](#/content/MafiaGame.md)\n\n#### How am I using it\n\nThis controller handles all actions relating to the *AWS Cognito* user pool for the game.  The *UserPool* contains the user accounts, but is only used to authenticate *Users*. \n\n##### Functions\n\n````ad-success\ntitle: RegisterUser\ncollapse:true\n\nPayload: \n\n~~~json\n{\n\t\"username\": \"example@gmail.com\",\n\t\"password\": \"password\"\n}\n~~~\n\nExpected behaviour:\n\nSends confirmation code to user email\n\n\n````\n\n!!! success Title\nPayload\n````json\n{\n\t\"username\": \"example@gmail.com\",\n\t\"password\": \"password\"\n}\n````\nExpected behaviour:\nSends confirmation code to user email\n!!! \n````\n\n```ad-success\ntitle: GetUser\ncollapse: true\n\nParams:\n~~~json\n{\n\t\"username\": \"example@gmail.com\"\n}\n~~~\n\nExpected output: CognitoUserEntity\n\n````\n\n\\#technical\n",
+        "src": "#/content/Technical/AuthController.md",
         "id": 12
     },
     {
         "title": "Controllers.md",
-        "body": "# Controllers\n\n### What is this\n\nControllers are what I use to refer to the different branches in the microservice approach I'm using to create [MafiaGame](#/content/MafiaGame.md)\n\n#### Currently implemented\n\n* [AuthController](#/content/Technical/AuthController.md) - handles registration/login/recovery/etc\n* *ChatController* - handles chat messages broadcast/lobby/private/etc\n\n##### Todos\n\n* *GameController*?\n* [LobbyControllerTasks](#/content/Misc/LobbyControllerTasks.md)\n* *UserController*\n* Others probably\n\n#### Controller Template\n\n````ad-note\ntitle: Python template\ncollapse: close\n~~~python\nimport json\n\ncors_headers = {\n'Content-Type': 'application/json',\n'Access-Control-Allow-Headers': '*',\n'Access-Control-Allow-Credentials': 'true',\n'Access-Control-Allow-Origin': 'http://localhost:8080',\n'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'\n}\n\ndef fail(msg):\nreturn {\n'statusCode': 403,\n'headers': cors_headers,\n'body': json.dumps(msg)\n}\n\ndef success(msg):\nreturn {\n'statusCode': 200,\n'headers': cors_headers,\n'body': json.dumps(msg)\n}\n\n\ndef handler(event, context):\nprint('request: {}'.format(json.dumps(event)))\n\nhttpMethod = event['requestContext']['http']['method']\nresource = event['requestContext']['http']['path']\nrequest_params = event.get('queryStringParameters', None)\nrequest_body = {}\n\nif 'body' in event and event['body'] != None:\nrequest_body = json.loads(event['body'])\n\nresult = {}\n\nif resource == '':\nif httpMethod == '':\npass\n\nreturn {\n\"statusCode\": 200,\n\"headers\": cors_headers,\n\"body\": json.dumps(event)\n}\n~~~\n\n````\n\n\\#technical\n",
+        "body": "# Controllers\n\n### What is this\n\nControllers are what I use to refer to the different branches in the microservice approach I'm using to create [MafiaGame](#/content/MafiaGame.md)\n\n#### Currently implemented\n\n* [AuthController](#/content/Technical/AuthController.md) - handles registration/login/recovery/etc\n* *ChatController* - handles chat messages broadcast/lobby/private/etc\n\n##### Todos\n\n* *GameController*?\n* *LobbyControllerTasks*\n* *UserController*\n* Others probably\n\n#### Controller Template\n\n````ad-note\ntitle: Python template\ncollapse: close\n~~~python\nimport json\n\ncors_headers = {\n'Content-Type': 'application/json',\n'Access-Control-Allow-Headers': '*',\n'Access-Control-Allow-Credentials': 'true',\n'Access-Control-Allow-Origin': 'http://localhost:8080',\n'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'\n}\n\ndef fail(msg):\nreturn {\n'statusCode': 403,\n'headers': cors_headers,\n'body': json.dumps(msg)\n}\n\ndef success(msg):\nreturn {\n'statusCode': 200,\n'headers': cors_headers,\n'body': json.dumps(msg)\n}\n\n\ndef handler(event, context):\nprint('request: {}'.format(json.dumps(event)))\n\nhttpMethod = event['requestContext']['http']['method']\nresource = event['requestContext']['http']['path']\nrequest_params = event.get('queryStringParameters', None)\nrequest_body = {}\n\nif 'body' in event and event['body'] != None:\nrequest_body = json.loads(event['body'])\n\nresult = {}\n\nif resource == '':\nif httpMethod == '':\npass\n\nreturn {\n\"statusCode\": 200,\n\"headers\": cors_headers,\n\"body\": json.dumps(event)\n}\n~~~\n\n````\n\n\\#technical\n",
+        "src": "#/content/Technical/Controllers.md",
         "id": 13
     },
     {
         "title": "Database.md",
         "body": "# Database Table\n\n### What is this\n\nThis is the primary database for [MafiaGame](#/content/MafiaGame.md). It's an *AWS DynamoDB* table following NoSql *Single Table Design* principles.\n\n#### How am I using it\n\n\\#technical\n",
+        "src": "#/content/Technical/Database.md",
         "id": 14
     },
     {
         "title": "GameState.md",
         "body": "# GameState\n\n### What is this\n\nA GameState is a representation of the current state of the game. The GameState can either be prepped for resolving or be the result of a prior resolved GameState via the [GameStateResolver](#/content/Technical/GameStateResolver.md).\n\n#### How am I using it\n",
+        "src": "#/content/Technical/GameState.md",
         "id": 15
     },
     {
         "title": "GameStateResolver.md",
         "body": "# GameStateResolver\n\n### What is this\n\nText\n\n#### How am I using it\n",
+        "src": "#/content/Technical/GameStateResolver.md",
         "id": 16
     },
     {
         "title": "HTTP Verbs.md",
         "body": "# HTTP Verb Cheatsheet\n\n### Quick Summary\n\n**<span style=\"color:orange\">POST</span>** - The URI specifies the <span style=\"color:pink\">\n*resource*</span> that the supplied entity should be <span style=\"color:orange\">\n***created***</span> under\n\n**<span style=\"color:deepSkyBlue\">PUT</span>** - The URI specifies the <span style=\"color:pink\">\n*entity*</span> that the supplied data shoud <span style=\"color:deepSkyBlue\">\n***replace***</span>\n\n**<span style=\"color:white\">PATCH</span>** - The URI specifies the <span style=\"color:pink\">\n*entity*</span> that the supplied data shoud be <span style=\"color:white\">\n***merged***</span> with\n\n**<span style=\"color:greenYellow\">GET</span>** - The URI specifies the <span style=\"color:pink\">\n*entity*</span> that should be  <span style=\"color:greenYellow\">\n***retrieved***</span>  (no body content)\n\n**<span style=\"color:tomato\">DELETE</span>** - The URI specifies the <span style=\"color:pink\">\n*entity*</span> that should be  <span style=\"color:tomato\">\n***deleted***</span>  (no body content)\n\n### Examples\n\n````ad-warning\ntitle: POST\nicon: \ncollapse: true\n\n\nCreate item using body data\n~~~py\nURL = \"https://###/api/projects?keys={params}\"\nBODY = {\n\t\"projectId\": \"1234-5678-etc\",\n\t\"attributes\": {\n\t\t\"projectName\": \"Example\",\n\t\t\"attribute2\": \"Value2\",\n\t}\n}\n\nRESPONSE = 201 Created\n~~~\n\nNote: Any logic handling should be done via the query string params. The `BODY` should exclusively contain the entity that is being created\n````\n\n````ad-info\ntitle: PUT\ncollapse: true\n\nReplace item at {projectId} with body data\n~~~py\nURL = \"https://###/api/projects/{projectId}?keys={params}\"\nBODY = {\n\t\"projectName\": \"Example\", # If you want to chance name\n\t\"attribute2\": \"Value2\",\n}\n\nRESPONSE = 201 Created or 200 OK\n~~~\n\n````\n\n````ad-quote\ntitle: PATCH\ncollapse: true\n\nModify item at {projectId} with body data (partial update instead of full replace as with PUT)\n~~~py\nURL = \"https://###/api/projects/{projectId}?keys={params}\"\nBODY = {\n\t\"projectName\": \"Example\", # If you want to chance name\n\t\"attribute2\": \"Value2\",\n}\n\nRESPONSE = 201 Created or 200 OK??\n~~~\n\n````\n\n````ad-success\ntitle: GET\ncollapse: true\n\nGet item at {projectId}\n~~~py\nURL = \"https://###/api/projects/{projectId}?keys={params}\"\nBODY = None\n\nRESPONSE = 200 OK\n~~~\n\nOR\n\nGet all projects\n~~~py\nURL = \"https://###/api/projects?keys={params}\"\nBODY = None\n\nRESPONSE = 200 OK\n~~~\n````\n\n````ad-error\ntitle: DELETE\ncollapse: true\n\nDelete item at {projectId}\n~~~py\nURL = \"https://###/api/projects/{projectId}?keys={params}\"\nBODY = None\n\nRESPONSE = 200 OK\n\n~~~\n````\n\n##### Tags\n\n\\#serverless #technical\n",
+        "src": "#/content/Technical/HTTP%20Verbs.md",
         "id": 17
-    },
-    {
-        "title": "Faction Card.md",
-        "body": "# <font style=\"color:red;\">Mafia</font>\n\n### Roles\n\n* #### Killing\n\n* [Mafioso](#/content/Gameplay/Mafia/Roles/Mafioso.md)\n* #### Power\n\n* #### Protective\n\n* #### Investigative\n",
-        "id": 18
-    },
-    {
-        "title": "RoleCard.md",
-        "body": "# <span style=\"color:greenYellow;\">{{title}}</span>\n\nFaction: [Town](#/content/Gameplay/Town/Town.md)\nWin Condition: Eliminate all evildoers. \nClass: #town_random #any_random\n\n## Description\n\nThe Citizen is the \"OG\" Mafia role. It's pretty boring to play, but when a Citizen actually gets a win it's the greatest thing ever.\n\nAs a citizen you need to work with the other [Town](#/content/Gameplay/Town/Town.md) members to kill all non-neutral roles.\n\n## Actions\n\n!!! night-actions Night Actions\nBulletproof vest:\nAt night you can don a bulletproof vest making you immune to basic deaths. This ability may only be used once\n!!! \n!!! day-actions Day Actions\nVote\n!!! \n!!! special-actions Special\nThe Citizen wins ties.\n!!!",
-        "id": 19
-    },
-    {
-        "title": "SimpleNote.md",
-        "body": "# Title\n\n### What is this\n\nText\n\n#### How am I using it\n",
-        "id": 20
     },
     {
         "title": "t8.md",
         "body": "[Test 1](#/content/test-folder/t2/t3/Test%201.md)\n\n[Test 2](#/content/test-folder/Test%202.md)\n",
-        "id": 21
+        "src": "#/content/test-folder/t2/t3/t4/t8.md",
+        "id": 18
     },
     {
         "title": "Test 1.md",
         "body": "\n",
-        "id": 22
+        "src": "#/content/test-folder/t2/t3/Test%201.md",
+        "id": 19
     },
     {
         "title": "Test 2.md",
         "body": "[Test 2](#/content/test-folder/Test%202.md)\n\n[t8](#/content/test-folder/t2/t3/t4/t8.md)\n",
-        "id": 23
+        "src": "#/content/test-folder/Test%202.md",
+        "id": 20
     }
 ]

@@ -6,7 +6,29 @@ And resource: https://visjs.github.io/vis-network/docs/network/nodes.html
 
 ## Login
 
-* [ ] All buttons should be disabled while login is attempting
+* [x] All buttons should be disabled while login is attempting
+* [x] Notify user when login fails
+
+## Lobby
+
+* [x] View Lobby
+* [ ] Create lobby
+* [x] Backend
+* [ ] Frontent
+* [x] Needs to be a tab?
+* [x] Click plus button swaps to new tab
+* [x] Create lobby tab Name, config (todo)
+* [ ] Submit creates the lobby, and joins the user into the new lobby
+* [ ] User feedback for when lobby is being created
+* [ ] Default config (not essential)
+* [ ] Join lobby
+* [ ] Subscribe to lobby endpoint for updates
+* [ ] Inform other players that a join has occured
+* [ ] Leave lobby
+* [ ] Unsubscribe from the lobby endpoint
+* [ ] Inform other players that a leave has occured
+* [ ] Remove dynamo record linking lobby and player
+* [ ] Lobby should delete on close
 
 ## Chat
 
@@ -17,6 +39,7 @@ And resource: https://visjs.github.io/vis-network/docs/network/nodes.html
 * [ ] Text inside chatbox colour should represent target
 * [ ] If user is not in LOBBY, should not be able to send lobby messages
 * [ ] When private message, how to specify target
+* [ ] The chat box isn't sized correctly
 
 ## Roles
 
@@ -33,3 +56,5 @@ When getting the players in a lobby, possibly don't want to return complete user
 * [x] For each player import required role
 * [x] Contruct a GameState
 * [x] Export the GameState
+
+User holds a reference to their current lobby. Need to check that reference

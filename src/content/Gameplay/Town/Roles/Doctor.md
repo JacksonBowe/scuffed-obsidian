@@ -8,7 +8,7 @@ Class: #town_protective #town_random #any_random
 
 The Doctor is a very powerful role that works best by staying undiscovered for as long as possible. Doctors are unable to heal themselves, but can be healed by other Doctors.
 
-Note: By default, Doctors cannot heal the *Mayor*
+**Note**: By default, Doctors cannot heal the *Mayor*
 
 As a doctor you need to work with the other [Town](#/content/Gameplay/Town/Town.md) members to lynch all those who would wish you harm.
 

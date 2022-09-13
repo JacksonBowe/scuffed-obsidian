@@ -19,7 +19,7 @@
 
         </div>
             <q-select class="col q-mx-lg" dense rounded  outlined v-model="searchSelection" @input-value="search" use-input input-debounce="0" label="Search docs..." :options="searchResults || []" behaviour="menu" >
-                <template v-slot:no-option>
+                <template v-slot:no-option >
                     <q-item>
                         <q-item-section class="text-grey">
                         No results
@@ -27,21 +27,23 @@
                     </q-item>
                 </template>
                 <template v-slot:option="scope">
-                    <q-item v-bind="scope.itemProps" style="height: 200px">
-                        <q-item-section avatar>
+                    <q-item class='bg-info' v-bind="scope.itemProps" style="height: 200px" clickable @click="openNote(scope.opt)">
+                        <q-item-section avatar class="" style="width:100px">
                             <q-item-label>{{ scope.opt.label }}</q-item-label>
                         </q-item-section>
+						<q-separator vertical inset spaced />
                         <q-item-section>
                             <q-scroll-area class="fit">
-                                <q-markdown :src="scope.opt.value" />
+                                <q-markdown :src="scope.opt.value"  no-heading-anchor-links :plugins="plugins" />
                             </q-scroll-area>
-                            
-                        </q-item-section>
+
+                        </q-item-section >
                     </q-item>
+					<q-separator inset />
                 </template>
             </q-select>
         <div>
-            Quasar v{{ $q.version }}
+            <span class="text-accent text-italic text-bold">Scuffed</span> v{{ version }}
         </div>
 		<div class="col" style="max-width: 200px">
 
@@ -53,12 +55,16 @@
 <script>
 import { fuse } from 'src/boot/fuse'
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import contentItems from '../content/.map.json'
+import { version } from '../../package.json'
+import taskLists from 'markdown-it-task-lists'
+import admonition from 'markdown-it-admonition'
 
 export default {
   name: 'SToolbar',
   setup () {
-        const leftDrawerOpen = ref(false)
+		const router = useRouter()
 
         const openGraph = () => {
             // TODO
@@ -72,26 +78,58 @@ export default {
         }
 
         const searchResults = computed(() => {
-            // console.log(fuse.search(searchTerms.value))
-            return fuse.search(searchTerms.value).map(
-                (result) => { 
-                    console.log({label: result.item.title, value: result.item.body})
-                    return {label: result.item.title.split('.')[0], value: result.item.body}
+            console.log(fuse.search(searchTerms.value), searchTerms.value)
+            return (fuse.search(searchTerms.value).map(
+                (result) => {
+                    // console.log({label: result.item.title, value: result.item.body, src: result.item.src})
+					let output = []
+					// console.log('search result', result.item.body.split('\n'))
+					const lines = result.item.body.split('\n')
+					for (let [index, line] of Object.entries(lines)) {
+						if (line.indexOf(searchTerms.value) > -1) {
+							if (index > 3) output.push(lines[index-4])
+							output.push(line)
+							if (index < lines.length - 3) output.push(lines[index+4])
+							break
+						}
+					}
+
+					// return null
+					console.log('output', output)
+					if (output.length) {
+						return { label: result.item.title.split('.')[0], value: output.join('\n'), src: result.item.src }
+					} else {
+						return null
+					}
                 }
-            )
+            )).filter(i => {
+				console.log('i', i)
+				return i !== null
+			})
         })
 
         const searchSelection = ref(null)
 
+
+		const openNote = (note) => {
+			// console.log('note', note)
+			searchSelection.value = null
+			router.push(note.src.replace('#', ''))
+		}
+
         return {
-        //   essentialLinks: linksList,
-        //   leftDrawerOpen,
-        contentItems,
-        openGraph,
-        searchTerms,
-        search,
-        searchResults,
-        searchSelection
+			contentItems,
+			openGraph,
+			searchTerms,
+			search,
+			searchResults,
+			searchSelection,
+			openNote,
+			version: version,
+			plugins: [
+				taskLists,
+				{plugin: admonition, options: {marker: '!', types: ["note", "abstract", "info", "tip", "success", "question", "warning", "failure", "danger", "bug", "example", "quote", "night-actions", "day-actions", "special-actions"]}}
+			]
         }
     }
 }

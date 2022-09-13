@@ -142,7 +142,7 @@ def parse(file: File):
     with open(file.path, 'r+') as f:
         lines = f.readlines()
         new_lines = []
-        for i, line in enumerate(lines):            
+        for i, line in enumerate(lines):
             line = Line(line)
 
             if line.is_empty_quote():
@@ -160,7 +160,7 @@ def parse(file: File):
         f.seek(0)
         f.writelines([line.value for line in new_lines])
         f.truncate()
-        
+
         # Read the new content back and save it to the File
         f.seek(0)
         file.content = f.read()
@@ -181,11 +181,12 @@ with open(start_path + '/.search.json', 'w') as s:
     json.dump([{
         'title': file.name,
         'body': file.content,
+        'src': file.url,
         'id': idx
     } for idx, file in enumerate(files)], s, indent=4)
 
 
-    
+
 
 
 

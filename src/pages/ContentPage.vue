@@ -70,9 +70,6 @@ export default defineComponent({
 			toc.value = x
 		}
 
-		console.log(container)
-
-
 		const q = useQuasar()
 
 

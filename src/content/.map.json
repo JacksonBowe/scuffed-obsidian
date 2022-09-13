@@ -135,27 +135,6 @@
             ]
         },
         {
-            "name": "Templates",
-            "type": "directory",
-            "children": [
-                {
-                    "name": "Faction Card",
-                    "type": "file",
-                    "src": "../content/Templates/Faction Card.md"
-                },
-                {
-                    "name": "RoleCard",
-                    "type": "file",
-                    "src": "../content/Templates/RoleCard.md"
-                },
-                {
-                    "name": "SimpleNote",
-                    "type": "file",
-                    "src": "../content/Templates/SimpleNote.md"
-                }
-            ]
-        },
-        {
             "name": "test-folder",
             "type": "directory",
             "children": [

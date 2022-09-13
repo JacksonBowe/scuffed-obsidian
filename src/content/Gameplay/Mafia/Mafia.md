@@ -2,13 +2,8 @@
 
 The traditional villians in the Mafia game.
 
-### Roles
-
-* #### Killing
-
-* [Mafioso](#/content/Gameplay/Mafia/Roles/Mafioso.md)
-* #### Power
-
-* #### Protective
-
-* #### Investigative
+|Class|Roles|
+|-----|-----|
+|Killing|*Disguiser*, *Godfather*, *Kidnapper*, [Mafioso](#/content/Gameplay/Mafia/Roles/Mafioso.md)|
+|Support|*Agent*, *Blackmailer*, *Consigliere*, *Consort*|
+|Deception|*Beguiler*, *Disguiser*, *Framer*, *Janitor*|

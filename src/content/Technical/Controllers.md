@@ -12,7 +12,7 @@ Controllers are what I use to refer to the different branches in the microservic
 ##### Todos
 
 * *GameController*?
-* [LobbyControllerTasks](#/content/Misc/LobbyControllerTasks.md)
+* *LobbyControllerTasks*
 * *UserController*
 * Others probably
 

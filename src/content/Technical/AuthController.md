@@ -30,7 +30,20 @@ Sends confirmation code to user email
 
 ````
 
-````ad-success
+!!! success Title
+Payload
+````json
+{
+	"username": "example@gmail.com",
+	"password": "password"
+}
+````
+Expected behaviour:
+Sends confirmation code to user email
+!!! 
+````
+
+```ad-success
 title: GetUser
 collapse: true
 
