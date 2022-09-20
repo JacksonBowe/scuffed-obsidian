@@ -1,42 +1,37 @@
 from dataclasses import dataclass, field
 import json
 import re
-from tracemalloc import start
-from typing import List, Dict, ClassVar, Tuple
+from typing import List, ClassVar, Tuple
 import os
 
-def is_md(name: str) -> bool:
-    return name.endswith('.md')
-
-x = os.listdir('./src/content')
-
-@dataclass
-class folder:
-    name: str
-    # files: Dict[str: str] = field(default_factory=dict)
-    sub_folders: List['folder'] = field(default_factory=list)
+# --------------------------------------------------------------------------- #
+#                                 General Utils                               #
+# --------------------------------------------------------------------------- #
 
 
-# for item in x:
-#   if is_md(item):
-#     print(item)
-
-
-# print(x)
-
-
+# --------------------------------------------------------------------------- #
+#                                Document Classes                             #
+# --------------------------------------------------------------------------- #
 @dataclass
 class File:
     name: str
     path: str
     content: str
     url: str
+    links: list = field(default_factory=list)
 
     def __init__(self, path) -> None:
         self.path = path.replace('\\', '/')
         self.url = path.replace('/src', '.').replace('\\', '/').replace('..', '#').replace(' ', '%20')
         self.name = self.path.split('/')[-1]
+        self.links = []
         pass
+
+    def build_links(self):
+        print('Building links')
+        links = re.findall(r"\[((.*?)\]\((?!http)(\S*?)(\.md)?(#\S+)?)\)", self.content)
+        for link in links:
+            self.links.append(link[1] + '.' + link[4].split('.')[-1])
 
     def read(self) -> str:
         with open(self.path, 'r') as f:
@@ -52,17 +47,11 @@ class Line:
         self.value =  self.value.replace('\[', '[')
         self.value =  self.value.replace('\]', ']')
 
-        # if self.in_container:
-        #     self._trim_start_for_container()
-
     def _trim_start_for_container(self):
-        # print('container line', [self.value])
         if not self.value.startswith('>'):
-            # print('breaking')
             self.in_container = False
         else:
             while self.value.startswith('>') or self.value.startswith(' '):
-                # print('Line starts with garbage, stripping')
                 self.value = self.value.lstrip(' ')
                 self.value = self.value.lstrip('>')
 
@@ -80,20 +69,13 @@ class Line:
         # > [!info] xxx  --> !!! info xxx
         callouts = self.callouts()
         if callouts:
-            # print('Entering container')
             Line.in_container = True
-            # print('line:', self.value)
-            # print('callouts:', callouts)
-            # in_container = True
             for callout in callouts:
                 self.value = self.value.replace(f'{callout[0]}', f'!!! {callout[2][1:].lower()} {callout[4] or callout[2][1:].lower().capitalize()}')
-            # print(f'new_line: {self.value}')
         else:
             if Line.in_container and (self.value == '\n' or self.value is None):
                 self.value = '!!! ' + self.value
                 Line.in_container = False
-            # elif Line.in_container:
-                # print('******************************', [self.value])
 
         if self.in_container: self._trim_start_for_container()
 
@@ -102,22 +84,21 @@ class Line:
 
     def convert_links(self):
         links = self.links()
+        # print(links)
         if not links: return
         for link in links:
             old_link = "[{}]({}{})".format(link[1], link[2], link[3])
-            file = next((f for f in files if f.name == link[1] + link[3]), None)   #files[link[1]] # Get the File pertaining to the file name captured in link[1]
+            file = next((f for f in FILES if f.name == link[1] + link[3]), None)   #FILES[link[1]] # Get the File pertaining to the file name captured in link[1]
             if file is None: return
             new_link = "[{}]({})".format(link[1], file.url)
             self.value = self.value.replace(old_link, new_link)
 
 
 
-start_path = './src/content'
-content = {}
 
-
-
-files = []
+# --------------------------------------------------------------------------- #
+#                                Worker Functions                             #
+# --------------------------------------------------------------------------- #
 
 def path_to_dict(path):
     # if 'files' not in locals(): files = {}
@@ -132,7 +113,7 @@ def path_to_dict(path):
         item['name'] = item['name'].replace('.md', '')
         item['src'] = path.replace('/src', '.').replace('\\', '/')
 
-        files.append(File(path))
+        FILES.append(File(path))
 
     return item
 
@@ -166,24 +147,38 @@ def parse(file: File):
         file.content = f.read()
 
 
-
-# Read the directory structure and extract all files. Place files into a key:value lookup
-with open(start_path + '/.map.json', 'w') as f:
-    json.dump(path_to_dict(start_path), f, indent=4)
+        file.build_links() # TODO need to convert file names into their index representation
 
 
-# print(json.dumps(files, indent=4))
 
-for file in files:
-    parse(file)
 
-with open(start_path + '/.search.json', 'w') as s:
-    json.dump([{
-        'title': file.name,
-        'body': file.content,
-        'src': file.url,
-        'id': idx
-    } for idx, file in enumerate(files)], s, indent=4)
+
+start_path = './src/content'
+content = {}
+
+FILES = []
+
+if __name__ == "__main__":
+    # Read the directory structure and extract all files. Place files into a key:value lookup
+    with open(start_path + '/.map.json', 'w') as f:
+        json.dump(path_to_dict(start_path), f, indent=4)
+
+
+    # print(json.dumps(files, indent=4))
+
+    for file in FILES:
+        parse(file)
+
+    with open(start_path + '/.files.json', 'w') as s:
+        res = [{
+            'title': file.name,
+            'body': file.content,
+            'src': file.url,
+            'id': idx,
+            'links': file.links
+        } for idx, file in enumerate(FILES)]
+        
+        json.dump(res, s, indent=4)
 
 
 

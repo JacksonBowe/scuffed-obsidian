@@ -4,7 +4,7 @@ const routes = [
 		path: '/',
 		component: () => import('layouts/GraphLayout.vue'),
 		children: [
-			{ path: '', component: () => import('pages/GraphPage.vue') }
+			{ path: 'graph', component: () => import('pages/GraphPage.vue') }
 		]
 	},
 	{

@@ -1,6 +1,6 @@
 import { boot } from 'quasar/wrappers'
 import Fuse from 'fuse.js'
-import files from '../content/.search.json'
+import files from '../content/.files.json'
 
 // var index = elasticlunr(function () {
 // 	this.addField('title');

@@ -69,6 +69,7 @@ export default {
         const openGraph = () => {
             // TODO
             console.log('opening graph')
+			router.push('/graph')
         }
 
         const searchTerms = ref('')

@@ -1,10 +1,30 @@
+from dataclasses import dataclass
+from typing import ClassVar
+
+@dataclass
+class TelstraProvider:
+    """ Telstra telecomms provider"""
+    name: str = "Telstra"
+    # license_numbers: ClassVar[list] = ["9469862", "9469871", "9469878", "10435053", "10388433"]
+
+    @property
+    def license_numbers(self):
+        return ["9469862", "9469871", "9469878", "10435053", "10388433"]
+
+    @license_numbers.setter
+    def license_numbers(self, value):
+        raise Exception('Cannot write to this variable')
 
 
-test = [0, 1, 2, 3]
 
+t = TelstraProvider()
+print('t', t.license_numbers)
+# ['9469862', '9469871', '9469878', '10435053', '10388433']
 
-result = next(x for x in test if x > 1)
+t2 = TelstraProvider()
+TelstraProvider.license_numbers = ['memes'] # !!!! Note this line
 
-print(result)
-
-
+print('t', t.license_numbers)
+# ['memes']
+print('t2', t2.license_numbers)
+# ['memes']

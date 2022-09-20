@@ -1,0 +1,15 @@
+[
+    {
+        "title": "Gameplay Overview.md",
+        "body": "\n",
+        "src": "#/content/Gameplay/Gameplay%20Overview.md",
+        "id": 0,
+        "links": []
+    },
+    {
+        "title": "Mafia.md",
+        "body": "# <font style=\"color:red;\">Mafia Overview</font>\n\nThe traditional villians in the Mafia game.\n\n|Class|Roles|\n|-----|-----|\n|Killing|*Disguiser*, *Godfather*, *Kidnapper*, [Mafioso](#/content/Gameplay/Mafia/Roles/Mafioso.md)|\n|Support|*Agent*, *Blackmailer*, *Consigliere*, *Consort*|\n|Deception|*Beguiler*, *Disguiser*, *Framer*, *Janitor*|\n",
+        "src": "#/content/Gameplay/Mafia/Mafia.md",
+        "id": 1,
+        "links": [
+            
