@@ -2,7 +2,7 @@
   <q-layout view="hHh LpR lFf" dark class="">
 
     <s-toolbar />
-        
+
     <q-page-container>
         <router-view />
     </q-page-container>

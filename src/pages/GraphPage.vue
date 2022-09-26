@@ -1,10 +1,14 @@
 <template>
 	<q-page padding class="row" dark>
-		<div ref="container">
+		<!-- <div class="bg-red" style="width: 100%; height: 100%;"> -->
+		<div class="col">
+			<div ref="container" style="height: 99%">
 			<!-- <div> -->
-				<canvas width="600" height="600"></canvas>
+				<canvas></canvas>
 			<!-- </div> -->
+			</div>
 		</div>
+
 	</q-page>
 </template>
 
@@ -15,11 +19,46 @@ import { onMounted, ref } from 'vue';
 // import * as vis from "vis-network"
 // import * as data from "vis-data"
 
+
+
 export default {
 	name: 'GraphPage',
 	setup () {
 		const q = useQuasar()
 		q.dark.set(true)
+
+		const GRAPH_OPTIONS = {
+			nodes: {
+				shape: "dot",
+				color: q.dark ? "#8c8e91" : "#dee2e6",
+				font: {
+					face: "Inter",
+					color: q.dark ? "#c9cdd1" : "#616469",
+					strokeColor: q.dark ? "#c9cdd1" : "#616469",
+				},
+				scaling: {
+					label: {
+						enabled: true,
+					},
+				},
+			},
+			edges: {
+				color: { inherit: "both" },
+				width: 0.8,
+				smooth: {
+					type: "continuous",
+				},
+				hoverWidth: 4,
+			},
+			interaction: {
+				hover: true,
+			},
+			height: "100%",
+			width: "100%",
+			physics: {
+				solver: "repulsion",
+			},
+		}
 
 		console.log('vis2', vis)
 		var nodes = new vis.DataSet([
@@ -38,7 +77,7 @@ export default {
 		}
 		onMounted(() => {
 			console.log(container.value)
-			// var network = new vis.Network(container.value, data, {})
+			var network = new vis.Network(container.value, data, GRAPH_OPTIONS)
 		})
 		//
 		console.log(data)
