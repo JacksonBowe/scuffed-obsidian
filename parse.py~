@@ -108,7 +108,7 @@ def path_to_dict(path):
         item['type'] = "directory"
         item['children'] = [path_to_dict(os.path.join(path,x)) for x in os.listdir(path) if not x.startswith(".")]
     else:
-		
+
         item['type'] = "file"
         item['name'] = item['name'].replace('.md', '')
         item['src'] = path.replace('/src', '.').replace('\\', '/')
@@ -177,7 +177,7 @@ if __name__ == "__main__":
             'id': idx,
             'links': file.links
         } for idx, file in enumerate(FILES)]
-
+        
         json.dump(res, s, indent=4)
 
 
