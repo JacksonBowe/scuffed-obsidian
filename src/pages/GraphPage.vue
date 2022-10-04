@@ -38,11 +38,13 @@ export default {
 				shape: "dot",
 				color: q.dark ? "#8c8e91" : "#dee2e6",
 				font: {
-					face: "Inter",
+					// face: "Inter",
+					size: 16,
 					color: q.dark ? "#c9cdd1" : "#616469",
 					strokeColor: q.dark ? "#c9cdd1" : "#616469",
 				},
 				scaling: {
+
 					label: {
 						enabled: true,
 					},
@@ -64,8 +66,8 @@ export default {
 			physics: {
 				solver: "repulsion",
 				repulsion: {
-				centralGravity: 0.2,
-				springLength: 200,
+				centralGravity: 0.6,
+				springLength: 250,
 				springConstant: 0.05,
 				nodeDistance: 100,
 				damping: 0.09
@@ -113,10 +115,23 @@ export default {
 			console.log('file', file)
 			nodes.add([{
 				id: file.id,
-				label: file.title,
-				size: Math.max(15, Math.min(15 + file.links.length, 30)),
-				color: PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)]
+				label: file.title.replace(".md", ''),
+				scaling: {
+					min: 10,
+					max: 30,
+					label: {
+						enabled: true,
+						min: 14,
+						max: 30,
+						maxVisible: 30,
+						drawThreshold: 5
+					}
+				},
+				src: file.src,
+				value: Math.log10(file.links.length + 1) + 1,
+				color: PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)],
 			}])
+			console.log(Math.log10(file.links.length + 1) + 1)
 			for (var link of file.links) {
 				console.log(link, files.find(e => e.title == link).id)
 				edges.add([{
@@ -135,6 +150,9 @@ export default {
 		onMounted(() => {
 			console.log(container.value)
 			var network = new vis.Network(container.value, data, GRAPH_OPTIONS)
+				.on('selectNode', (p) => {
+					console.log('p', files.find(x => x.id == p.nodes[0]))
+				})
 		})
 		//
 		console.log(data)

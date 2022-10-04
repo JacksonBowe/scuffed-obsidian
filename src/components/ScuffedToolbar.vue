@@ -42,10 +42,15 @@
 					<q-separator inset />
                 </template>
             </q-select>
-        <div>
-            <span class="text-accent text-italic text-bold">Scuffed</span> v{{ version }}
+        <div class="">
+			<q-btn rounded flat class="text-italic text-accent text-bold" no-caps>
+				<div>
+					Scuffed  <q-badge color="secondary bg-transparent" transparent dense floating >v{{ version }}</q-badge>
+				</div>
+			</q-btn>
+            <!-- <span class="text-accent text-italic text-bold">Scuffed</span> -->
         </div>
-		<div class="col" style="max-width: 200px">
+		<div class="coln" style="max-width: 200px">
 
 		</div>
       </q-toolbar>
