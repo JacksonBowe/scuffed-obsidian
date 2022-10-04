@@ -66,11 +66,11 @@ export default {
 			physics: {
 				solver: "repulsion",
 				repulsion: {
-				centralGravity: 0.6,
-				springLength: 250,
-				springConstant: 0.05,
-				nodeDistance: 100,
-				damping: 0.09
+                    centralGravity: 0.6,
+                    springLength: 250,
+                    springConstant: 0.05,
+                    nodeDistance: 100,
+                    damping: 0.10
 				}
 			},
 		}
@@ -127,6 +127,9 @@ export default {
 						drawThreshold: 5
 					}
 				},
+                // physics: {
+                //     springLength: 500
+                // },
 				src: file.src,
 				value: Math.log10(file.links.length + 1) + 1,
 				color: PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)],
@@ -134,7 +137,10 @@ export default {
 			console.log(Math.log10(file.links.length + 1) + 1)
 			for (var link of file.links) {
 				console.log(link, files.find(e => e.title == link).id)
-				edges.add([{
+                // Check if link already exists
+                if (edges.get().some(e => e.to == file.id && e.from == files.find(e => e.title == link).id)) { continue }
+				// Add new link
+                edges.add([{
 					from: file.id,
 					to: files.find(e => e.title == link).id,
 					length: getRandomInt(100, 201)
