@@ -26,6 +26,13 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
+const pointOnCircumference = (radius) => {
+    var angle = Math.random() * Math.PI*2; // Random angle
+    var x = Math.cos(angle) * radius;
+    var y = Math.sin(angle) * radius;
+    return [x, y]
+}
+
 
 export default {
 	name: 'GraphPage',
@@ -64,13 +71,13 @@ export default {
 			height: "100%",
 			width: "100%",
 			physics: {
-				solver: "repulsion",
+				solver: "barnesHut",
 				repulsion: {
                     centralGravity: 0.6,
                     springLength: 250,
                     springConstant: 0.05,
-                    nodeDistance: 100,
-                    damping: 0.10
+                    nodeDistance: 200,
+                    damping: 0.3
 				}
 			},
 		}
@@ -113,7 +120,7 @@ export default {
 
 		for (var file of files) {
 			console.log('file', file)
-			nodes.add([{
+            let node = {
 				id: file.id,
 				label: file.title.replace(".md", ''),
 				scaling: {
@@ -124,19 +131,27 @@ export default {
 						min: 14,
 						max: 30,
 						maxVisible: 30,
-						drawThreshold: 5
+						drawThreshold: 15
 					}
 				},
-                // physics: {
-                //     springLength: 500
-                // },
+				mass: 1,
 				src: file.src,
-				value: Math.log10(file.links.length + 1) + 1,
+				value: (file.links.length^2) + 5,
 				color: PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)],
-			}])
+			}
+
+            if (!file.links.length) {
+                // node.physics = false
+				console.log('p', pointOnCircumference(1000))
+                var [x, y] = pointOnCircumference(5000)
+				node.x = x
+				node.y = y
+				console.log('n', node)
+            }
+
+			nodes.add([node])
 			console.log(Math.log10(file.links.length + 1) + 1)
 			for (var link of file.links) {
-				console.log(link, files.find(e => e.title == link).id)
                 // Check if link already exists
                 if (edges.get().some(e => e.to == file.id && e.from == files.find(e => e.title == link).id)) { continue }
 				// Add new link
@@ -153,12 +168,18 @@ export default {
 			nodes: nodes,
 			edges: edges
 		}
+
+
+
 		onMounted(() => {
 			console.log(container.value)
 			var network = new vis.Network(container.value, data, GRAPH_OPTIONS)
 				.on('selectNode', (p) => {
 					console.log('p', files.find(x => x.id == p.nodes[0]))
 				})
+                .on('hoverNode', (p) => {
+                    console.log('hovering', p)
+                })
 		})
 		//
 		console.log(data)
