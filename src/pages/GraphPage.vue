@@ -17,8 +17,6 @@ import { useQuasar } from 'quasar';
 import { vis } from 'src/boot/vis';
 import { onMounted, ref } from 'vue';
 import files from '../content/.files.json'
-// import * as vis from "vis-network"
-// import * as data from "vis-data"
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -39,7 +37,8 @@ export default {
 	setup () {
 		const q = useQuasar()
 		q.dark.set(true)
-
+		const colors = require('../utils/colors.js'); // surveyUtils
+		console.log(colors)
 		const GRAPH_OPTIONS = {
 			nodes: {
 				shape: "dot",
