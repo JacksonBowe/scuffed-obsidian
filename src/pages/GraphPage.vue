@@ -115,7 +115,7 @@ export default {
 						drawThreshold: 10
 					}
 				},
-				mass: (edges.get().filter(e => e.to == file.id)).length + 1,
+				mass: 1,
 				src: file.src,
 				value: (edges.get().filter(e => e.to == file.id)).length + 1,
 				color: PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)],
