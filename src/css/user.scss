@@ -1,3 +1,47 @@
+/*
+	Text Colours
+*/
+
+$text-folder: #fdffb6ff;
+$text-note: #fdffb6ff;
+$text-link: hotpink;
+$text-link-hover: #ffd6a5ff;
+$light-pink: #ffadadff;
+$deep-champagne: #ffd6a5ff;
+$tea-green: #caffbfff;
+$electric-blue: #9bf6ffff;
+$baby-blue-eyes: #a0c4ffff;
+$maximum-blue-purple: #bdb2ffff;
+$mauve: #ffc6ffff;
+$baby-powder: #fffffcff;
+
+.nav-header {
+	color: $mauve
+}
+
+.folder {
+	color: $text-folder
+}
+
+.note {
+	color: $electric-blue
+}
+
+a {
+	color: $text-link
+}
+
+a:hover {
+	color: $baby-powder
+}
+
+
+
+
+/*
+	Admonitions / Callouts
+*/
+
 $admonition-color-map: (
 	//
 	"note": #448aff,
@@ -46,7 +90,7 @@ $admonition-background-color-map: (
     background-color: map-get($admonition-background-color-map, "note");
     border-left: 0.25rem solid map-get($admonition-color-map, "note");
     overflow: auto;
-    
+
 
     .admonition-title {
         font-weight: bold;
