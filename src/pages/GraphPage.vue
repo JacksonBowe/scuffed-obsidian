@@ -17,6 +17,7 @@ import { useQuasar } from 'quasar';
 import { vis } from 'src/boot/vis';
 import { onMounted, ref } from 'vue';
 import files from '../content/.files.json'
+import { DISTINCT_COLORS, PASTEL_COLORS } from '../utils/colors.js';
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -37,8 +38,7 @@ export default {
 	setup () {
 		const q = useQuasar()
 		q.dark.set(true)
-		const colors = require('../utils/colors.js'); // surveyUtils
-		console.log(colors)
+
 		const GRAPH_OPTIONS = {
 			nodes: {
 				shape: "dot",
@@ -81,44 +81,11 @@ export default {
 			},
 		}
 
-		const PASTEL_COLORS = [
-			"#FFADAD",
-			"#FFD6A5",
-			"#FDFFB6",
-			"#CAFFBF",
-			"#9BF6FF",
-			"#A0C4FF",
-			"#BDB2FF",
-			"#FFC6FF",
-			"#FBF8CC",
-			"#FDE4CF",
-			"#FFCFD2",
-			"#F1C0E8",
-			"#CFBAF0",
-			"#A3C4F3",
-			"#90DBF4",
-			"#8EECF5",
-			"#98F5E1",
-			"#B9FBC0",
-			"#EAE4E9",
-			"#FFF1E6",
-			"#FDE2E4",
-			"#FAD2E1",
-			"#E2ECE9",
-			"#BEE1E6",
-			"#F0EFEB",
-			"#DFE7FD",
-			"#CDDAFD",
-		]
-
-		console.log('vis2', vis)
 		var nodes = new vis.DataSet([])
 
 		var edges = new vis.DataSet([])
-		console.log(files)
 
 		for (var file of files) {
-			console.log('file', file)
             let node = {
 				id: file.id,
 				label: file.title.replace(".md", ''),
@@ -129,8 +96,8 @@ export default {
 						enabled: true,
 						min: 14,
 						max: 30,
-						maxVisible: 30,
-						drawThreshold: 15
+						// maxVisible: 30,
+						drawThreshold: 10
 					}
 				},
 				mass: 1,
@@ -141,15 +108,13 @@ export default {
 
             if (!file.links.length) {
                 // node.physics = false
-				console.log('p', pointOnCircumference(1000))
                 var [x, y] = pointOnCircumference(5000)
+				node.value = 1
 				node.x = x
 				node.y = y
-				console.log('n', node)
             }
 
 			nodes.add([node])
-			console.log(Math.log10(file.links.length + 1) + 1)
 			for (var link of file.links) {
                 // Check if link already exists
                 if (edges.get().some(e => e.to == file.id && e.from == files.find(e => e.title == link).id)) { continue }
@@ -168,20 +133,19 @@ export default {
 			edges: edges
 		}
 
+		// let colors
 
-
-		onMounted(() => {
-			console.log(container.value)
+		onMounted(async () => {
 			var network = new vis.Network(container.value, data, GRAPH_OPTIONS)
 				.on('selectNode', (p) => {
-					console.log('p', files.find(x => x.id == p.nodes[0]))
+
+					console.log('p', p, files.find(x => x.id == p.nodes[0]))
 				})
                 .on('hoverNode', (p) => {
                     console.log('hovering', p)
                 })
 		})
 		//
-		console.log(data)
 
 
 		return {
