@@ -86,6 +86,21 @@ export default {
 		var edges = new vis.DataSet([])
 
 		for (var file of files) {
+			// Add the edges
+			for (var link of file.links) {
+				// Check if link already exists
+                if (edges.get().some(e => e.from == file.id && e.to == files.find(e => e.title == link).id)) { continue }
+                // Check if backlink already exists
+                if (edges.get().some(e => e.to == file.id && e.from == files.find(e => e.title == link).id)) { continue }
+
+				// Add new link
+                edges.add([{
+					from: file.id,
+					to: files.find(e => e.title == link).id,
+					length: getRandomInt(100, 201)
+				}])
+			}
+
             let node = {
 				id: file.id,
 				label: file.title.replace(".md", ''),
@@ -100,14 +115,13 @@ export default {
 						drawThreshold: 10
 					}
 				},
-				mass: 1,
+				mass: (edges.get().filter(e => e.to == file.id)).length + 1,
 				src: file.src,
-				value: (file.links.length^2) + 5,
+				value: (edges.get().filter(e => e.to == file.id)).length + 1,
 				color: PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)],
 			}
 
             if (!file.links.length) {
-                // node.physics = false
                 var [x, y] = pointOnCircumference(5000)
 				node.value = 1
 				node.x = x
@@ -115,16 +129,7 @@ export default {
             }
 
 			nodes.add([node])
-			for (var link of file.links) {
-                // Check if link already exists
-                if (edges.get().some(e => e.to == file.id && e.from == files.find(e => e.title == link).id)) { continue }
-				// Add new link
-                edges.add([{
-					from: file.id,
-					to: files.find(e => e.title == link).id,
-					length: getRandomInt(100, 201)
-				}])
-			}
+
 		}
 
 		const container = ref(null)
@@ -138,7 +143,13 @@ export default {
 		onMounted(async () => {
 			var network = new vis.Network(container.value, data, GRAPH_OPTIONS)
 				.on('selectNode', (p) => {
-
+					let file = files.find(x => x.id == p.nodes[0])
+					var t = []
+					edges.forEach(e => {
+						console.log(e.to, file.id)
+						if (e.to == file.id) { t.push(e) }
+					})
+					console.log('edges that reference', t)
 					console.log('p', p, files.find(x => x.id == p.nodes[0]))
 				})
                 .on('hoverNode', (p) => {
