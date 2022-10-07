@@ -12,7 +12,7 @@ const routes = [
 		component: () => import('layouts/ContentLayout.vue'),
 		children: [
 			{ path: '', component: () => import('pages/ContentPage.vue') },
-			{ path: ':test(.*)*', component: () => import('pages/ContentPage.vue') }
+			{ path: ':keys(.*)*', component: () => import('pages/ContentPage.vue') }
 		]
 	},
 

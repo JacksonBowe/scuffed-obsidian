@@ -27,7 +27,7 @@
                     </q-item>
                 </template>
                 <template v-slot:option="scope">
-                    <q-item class='bg-info' v-bind="scope.itemProps" style="height: 200px" clickable @click="openNote(scope.opt)">
+                    <q-item class='' v-bind="scope.itemProps" style="max-height: 200px" clickable @click="openNote(scope.opt)">
                         <q-item-section avatar class="" style="width:100px">
                             <q-item-label>{{ scope.opt.label }}</q-item-label>
                         </q-item-section>

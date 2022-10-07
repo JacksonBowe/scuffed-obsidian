@@ -13,6 +13,9 @@
 		<!-- <div class="q-pa-none" v-for="heading in toc" :key="heading">
 			<span class="q-pa-none" > {{heading.label}}</span>
 		</div> -->
+		<div class="bg-red">
+			<s-local-graph></s-local-graph>
+		</div>
 		<q-list dense>
 			<q-item-label header class="body">ON THIS PAGE</q-item-label>
 			<q-item dense v-for="section in toc" :key="section" class="toc-item" :inset-level="(section.level-1) / 4" >
@@ -29,6 +32,7 @@
 <script>
 import { defineComponent, computed, onUpdated, onMounted, ref } from 'vue'
 import { useQuasar } from 'quasar'
+import SLocalGraph from 'src/components/SLocalGraph.vue'
 import taskLists from 'markdown-it-task-lists'
 import admonition from 'markdown-it-admonition'
 import container from 'markdown-it-container'
@@ -38,6 +42,9 @@ import {  onBeforeRouteUpdate, useRoute } from 'vue-router'
 
 export default defineComponent({
 	name: 'ContentPage',
+	components: {
+		SLocalGraph
+	},
 	setup () {
 
 		const route = useRoute()
