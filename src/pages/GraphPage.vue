@@ -43,6 +43,7 @@ export default {
 			nodes: {
 				shape: "dot",
 				color: q.dark ? "#8c8e91" : "#dee2e6",
+
 				font: {
 					// face: "Inter",
 					size: 16,
@@ -70,7 +71,7 @@ export default {
 			height: "100%",
 			width: "100%",
 			physics: {
-				solver: "barnesHut",
+				solver: "repulsion",
 				repulsion: {
                     centralGravity: 0.6,
                     springLength: 250,
@@ -79,6 +80,9 @@ export default {
                     damping: 0.3
 				}
 			},
+			layout: {
+				clusterThreshold: 10
+			}
 		}
 
 		var nodes = new vis.DataSet([])
@@ -119,6 +123,7 @@ export default {
 				src: file.src,
 				value: (edges.get().filter(e => e.to == file.id)).length + 1,
 				color: PASTEL_COLORS[Math.floor(Math.random() * PASTEL_COLORS.length)],
+				// opacity: 0.8
 			}
 
             if (!file.links.length) {
@@ -154,6 +159,8 @@ export default {
 				})
                 .on('hoverNode', (p) => {
                     console.log('hovering', p)
+					console.log(nodes.get()[p.node])
+					nodes.get()[p.node].opacity = 1
                 })
 		})
 		//

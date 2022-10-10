@@ -27,7 +27,7 @@
                     </q-item>
                 </template>
                 <template v-slot:option="scope">
-                    <q-item class='' v-bind="scope.itemProps" style="max-height: 200px" clickable @click="openNote(scope.opt)">
+                    <q-item class='' v-bind="scope.itemProps" style="height: 100px; width: 80%;" clickable @click="openNote(scope.opt)">
                         <q-item-section avatar class="" style="width:100px">
                             <q-item-label>{{ scope.opt.label }}</q-item-label>
                         </q-item-section>
@@ -65,6 +65,7 @@ import contentItems from '../content/.map.json'
 import { version } from '../../package.json'
 import taskLists from 'markdown-it-task-lists'
 import admonition from 'markdown-it-admonition'
+import mark from 'markdown-it-mark'
 
 export default {
   name: 'SToolbar',
@@ -92,8 +93,15 @@ export default {
 					// console.log('search result', result.item.body.split('\n'))
 					const lines = result.item.body.split('\n')
 					for (let [index, line] of Object.entries(lines)) {
+						// console.log('line', line, line.startsWith('#'))
+						if (line.startsWith('#')) continue
 						if (line.indexOf(searchTerms.value) > -1) {
 							if (index > 3) output.push(lines[index-4])
+							for (let word of searchTerms.value.split(' ')) {
+								console.log('word', word)
+								line = line.replace(word, `==${word}==`)
+							}
+							// output.push(line.replace(searchTerms.value, `==${searchTerms.value}==`))
 							output.push(line)
 							if (index < lines.length - 3) output.push(lines[index+4])
 							break
@@ -134,6 +142,7 @@ export default {
 			version: version,
 			plugins: [
 				taskLists,
+				mark,
 				{plugin: admonition, options: {marker: '!', types: ["note", "abstract", "info", "tip", "success", "question", "warning", "failure", "danger", "bug", "example", "quote", "night-actions", "day-actions", "special-actions"]}}
 			]
         }

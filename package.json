@@ -17,6 +17,7 @@
     "fuse.js": "^6.6.2",
     "markdown-it-admonition": "^1.0.4",
     "markdown-it-container": "^3.0.0",
+    "markdown-it-mark": "^3.0.1",
     "markdown-it-task-lists": "^2.1.1",
     "pinia": "^2.0.11",
     "quasar": "^2.6.0",
