@@ -32,7 +32,7 @@
 <script>
 import { defineComponent, computed, onUpdated, onMounted, ref } from 'vue'
 import { useQuasar } from 'quasar'
-import SLocalGraph from 'src/components/SLocalGraph.vue'
+import SLocalGraph from 'src/components/SGraph.vue'
 import taskLists from 'markdown-it-task-lists'
 import admonition from 'markdown-it-admonition'
 import container from 'markdown-it-container'
